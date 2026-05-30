@@ -4,433 +4,464 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ムスカムスカ育成ゲーム</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Klee+One:wght@400;600&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --bg: #1a1a2e;
-  --bg2: #16213e;
-  --bg3: #0f3460;
-  --accent: #e94560;
-  --accent2: #f5a623;
-  --text: #eaeaea;
-  --text2: #a8a8c0;
-  --card: rgba(255,255,255,0.05);
-  --border: rgba(255,255,255,0.1);
-  --purple: #7f77dd;
-  --teal: #1d9e75;
-  --coral: #d85a30;
-  --pink: #d4537e;
-  --amber: #ba7517;
-  --green: #639922;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#e8f5e3;--bg2:#d4ecc8;--card:#ffffffcc;--border:#b5d9a0;
+  --text:#2d4a1e;--text2:#5a7a48;--text3:#8aaa6a;
+  --green:#5cb85c;--teal:#3aada0;--coral:#e07a5f;--pink:#d4537e;
+  --amber:#c49a2a;--purple:#7f77dd;--navy:#3d5a80;
+  --accent:#3aada0;
 }
-
-body {
-  font-family: 'Zen Maru Gothic', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
+body{
+  font-family:'Zen Maru Gothic',sans-serif;
+  background:var(--bg);
+  min-height:100vh;
+  display:flex;align-items:flex-start;justify-content:center;
+  padding:1rem;
   background-image:
-    radial-gradient(ellipse at 20% 50%, rgba(127,119,221,0.15) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 20%, rgba(233,69,96,0.1) 0%, transparent 50%);
+    radial-gradient(circle at 10% 20%,rgba(90,200,150,0.15) 0%,transparent 50%),
+    radial-gradient(circle at 90% 80%,rgba(58,173,160,0.12) 0%,transparent 50%);
 }
+#app{width:100%;max-width:400px;}
 
-#app {
-  width: 100%;
-  max-width: 420px;
-}
-
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 1.25rem;
-  margin-bottom: 12px;
-  backdrop-filter: blur(10px);
+/* ヘッダー */
+.game-title{
+  text-align:center;font-family:'Klee One',cursive;font-size:13px;
+  color:var(--text3);letter-spacing:0.15em;margin-bottom:6px;padding-top:4px;
 }
 
 /* キャラカード */
-.chara-card {
-  text-align: center;
-  background: linear-gradient(135deg, rgba(127,119,221,0.15), rgba(233,69,96,0.1));
-  border-color: rgba(127,119,221,0.3);
-  position: relative;
-  overflow: hidden;
+.chara-card{
+  background:var(--card);border:1.5px solid var(--border);
+  border-radius:24px;padding:1.2rem 1rem 1rem;
+  margin-bottom:10px;text-align:center;
+  box-shadow:0 4px 20px rgba(90,160,80,0.12);
+  position:relative;overflow:hidden;
 }
-.chara-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 30%, rgba(127,119,221,0.1), transparent 70%);
-  pointer-events: none;
+.chara-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(90,200,150,0.1),transparent 70%);
+  pointer-events:none;
 }
 
-.chara-face {
-  font-size: 72px;
-  line-height: 1;
-  margin: 4px 0;
-  display: inline-block;
-  filter: drop-shadow(0 0 12px rgba(127,119,221,0.4));
-  transition: transform 0.3s ease;
+/* SVGキャラクター */
+#chara-svg-wrap{
+  width:140px;height:180px;margin:0 auto 4px;
+  position:relative;
 }
-.chara-face.bounce {
-  animation: bounce 0.4s ease;
-}
-@keyframes bounce {
-  0%,100% { transform: scale(1); }
-  40% { transform: scale(1.2) rotate(-5deg); }
-  70% { transform: scale(0.95) rotate(3deg); }
-}
+#chara-svg-wrap svg{width:100%;height:100%;}
 
-.chara-name {
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--text);
-  margin-top: 6px;
-  letter-spacing: 0.05em;
+/* 着替えボタン */
+.outfit-row{
+  display:flex;justify-content:center;gap:6px;margin-bottom:10px;flex-wrap:wrap;
 }
-.chara-level {
-  font-size: 13px;
-  color: var(--text2);
-  margin-top: 2px;
+.outfit-btn{
+  font-size:11px;padding:4px 10px;border-radius:100px;
+  border:1.5px solid var(--border);background:#fff8;
+  color:var(--text2);cursor:pointer;transition:all 0.2s;font-family:inherit;
 }
+.outfit-btn:hover{background:var(--bg2);border-color:var(--teal);}
+.outfit-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
 
-.mood-badge {
-  display: inline-block;
-  font-size: 12px;
-  padding: 3px 14px;
-  border-radius: 100px;
-  margin-top: 8px;
-  font-weight: 500;
-  transition: all 0.3s;
+.chara-name{font-size:20px;font-weight:700;color:var(--text);font-family:'Klee One',cursive;}
+.chara-level{font-size:12px;color:var(--text3);margin-top:1px;}
+.mood-badge{
+  display:inline-block;font-size:12px;padding:3px 14px;
+  border-radius:100px;margin-top:6px;font-weight:500;transition:all 0.3s;
 }
+.exp-row{display:flex;align-items:center;gap:6px;margin-top:10px;}
+.exp-lbl{font-size:11px;color:var(--text3);white-space:nowrap;}
+.exp-num{font-size:11px;color:var(--text3);white-space:nowrap;}
 
-.exp-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 12px;
+/* ステータスカード */
+.card{
+  background:var(--card);border:1.5px solid var(--border);
+  border-radius:18px;padding:1rem 1.1rem;margin-bottom:10px;
+  box-shadow:0 2px 10px rgba(90,160,80,0.08);
 }
-.exp-label { font-size: 12px; color: var(--text2); white-space: nowrap; }
-.bar-bg {
-  flex: 1;
-  height: 6px;
-  border-radius: 3px;
-  background: rgba(255,255,255,0.1);
-  overflow: hidden;
+.section-title{
+  font-size:11px;font-weight:700;color:var(--text3);
+  letter-spacing:0.1em;margin-bottom:9px;
 }
-.bar-fill {
-  height: 100%;
-  border-radius: 3px;
-  transition: width 0.5s cubic-bezier(0.34,1.56,0.64,1);
-}
-.exp-num { font-size: 12px; color: var(--text2); white-space: nowrap; }
+.stat-row{display:flex;align-items:center;gap:6px;margin-bottom:8px;}
+.stat-label{font-size:12px;color:var(--text2);width:74px;flex-shrink:0;line-height:1.2;}
+.bar-bg{flex:1;height:7px;border-radius:4px;background:rgba(0,0,0,0.07);overflow:hidden;}
+.bar-fill{height:100%;border-radius:4px;transition:width 0.5s cubic-bezier(.34,1.56,.64,1);}
+.stat-val{font-size:12px;font-weight:700;width:32px;text-align:right;color:var(--text);}
 
-/* ステータス */
-.section-title {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text2);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-.stat-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 9px;
-}
-.stat-label {
-  font-size: 12px;
-  color: var(--text2);
-  width: 68px;
-  flex-shrink: 0;
-}
-.stat-val {
-  font-size: 12px;
-  font-weight: 700;
-  width: 36px;
-  text-align: right;
-  color: var(--text);
-}
+/* なつき・おなかは大きめバー */
+.special-stat .bar-bg{height:10px;border-radius:5px;}
+.special-stat .stat-label{font-size:13px;}
+.special-stat .stat-val{font-size:13px;}
 
 /* ボタン */
-.btn-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+.btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+button.action-btn{
+  cursor:pointer;font-family:'Zen Maru Gothic',sans-serif;font-size:13px;font-weight:500;
+  padding:11px 8px;border-radius:14px;border:1.5px solid var(--border);
+  background:#fff9;color:var(--text);transition:all 0.15s;
+  display:flex;align-items:center;justify-content:center;gap:5px;
 }
-button {
-  cursor: pointer;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 11px 10px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.05);
-  color: var(--text);
-  transition: all 0.15s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  letter-spacing: 0.02em;
+button.action-btn:hover:not(:disabled){
+  background:var(--bg2);border-color:var(--teal);transform:translateY(-1px);
+  box-shadow:0 3px 10px rgba(58,173,160,0.2);
 }
-button:hover:not(:disabled) {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(127,119,221,0.5);
-  transform: translateY(-1px);
-}
-button:active:not(:disabled) {
-  transform: scale(0.97) translateY(0);
-}
-button:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
+button.action-btn:active:not(:disabled){transform:scale(0.97);}
+button.action-btn:disabled{opacity:0.35;cursor:default;}
 
-/* オートチェック */
-.auto-wrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 10px;
-}
-.auto-wrap input[type=checkbox] { accent-color: var(--purple); width: 14px; height: 14px; cursor: pointer; }
-.auto-wrap label { font-size: 12px; color: var(--text2); cursor: pointer; }
+.auto-wrap{display:flex;align-items:center;gap:7px;margin-top:10px;}
+.auto-wrap input[type=checkbox]{accent-color:var(--teal);width:14px;height:14px;cursor:pointer;}
+.auto-wrap label{font-size:12px;color:var(--text3);cursor:pointer;}
 
 /* ログ */
-.log {
-  font-size: 13px;
-  color: var(--text2);
-  line-height: 1.7;
-  min-height: 44px;
-  transition: opacity 0.2s;
+.log{font-size:13px;color:var(--text2);line-height:1.7;min-height:42px;}
+.log-flash{animation:logfade 0.3s ease;}
+@keyframes logfade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+
+/* レベルアップ */
+#lvup-overlay{
+  position:fixed;inset:0;display:flex;align-items:center;
+  justify-content:center;pointer-events:none;z-index:99;
 }
-.log-flash {
-  animation: logflash 0.3s ease;
+.lvup-msg{
+  font-size:28px;font-weight:700;color:#2d8a60;
+  text-shadow:0 0 16px rgba(58,173,160,0.5);
+  animation:lvup 1.3s ease forwards;display:none;
+  font-family:'Klee One',cursive;
 }
-@keyframes logflash {
-  0% { opacity: 0; transform: translateY(4px); }
-  100% { opacity: 1; transform: none; }
+@keyframes lvup{
+  0%{opacity:0;transform:scale(0.6) translateY(20px)}
+  35%{opacity:1;transform:scale(1.1) translateY(0)}
+  70%{opacity:1;transform:scale(1)}
+  100%{opacity:0;transform:scale(0.9) translateY(-20px)}
 }
 
-/* レベルアップ演出 */
-#levelup-overlay {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  z-index: 99;
-}
-.levelup-msg {
-  font-size: 32px;
-  font-weight: 700;
-  color: #ffd700;
-  text-shadow: 0 0 20px rgba(255,215,0,0.6);
-  animation: lvup 1.2s ease forwards;
-  display: none;
-}
-@keyframes lvup {
-  0% { opacity: 0; transform: scale(0.5) translateY(20px); }
-  30% { opacity: 1; transform: scale(1.1) translateY(0); }
-  70% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(0.9) translateY(-20px); }
+/* キャラアニメ */
+.bounce{animation:bounce 0.4s ease;}
+@keyframes bounce{
+  0%,100%{transform:scale(1)}
+  40%{transform:scale(1.1) rotate(-4deg)}
+  70%{transform:scale(0.96) rotate(2deg)}
 }
 </style>
 </head>
 <body>
-
 <div id="app">
-  <div class="card chara-card">
-    <div class="chara-face" id="chara-face">🪰</div>
+  <div class="game-title">✦ むすかむすか育成ゲーム ✦</div>
+
+  <div class="chara-card">
+    <div id="chara-svg-wrap">
+      <!-- SVGキャラクター：ムスカムスカちゃん -->
+      <svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg" id="chara-svg">
+        <defs>
+          <radialGradient id="glowGrad" cx="50%" cy="40%" r="50%">
+            <stop offset="0%" stop-color="#b8f0d8" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#7adec0" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <!-- 後光 -->
+        <ellipse cx="70" cy="80" rx="56" ry="68" fill="url(#glowGrad)"/>
+        <!-- 触角 -->
+        <line x1="56" y1="22" x2="44" y2="4" stroke="#3aada0" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="44" cy="3" r="3" fill="#3aada0"/>
+        <line x1="84" y1="22" x2="96" y2="4" stroke="#3aada0" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="96" cy="3" r="3" fill="#3aada0"/>
+        <!-- 羽（透明感） -->
+        <ellipse cx="22" cy="105" rx="18" ry="38" fill="rgba(180,240,220,0.45)" stroke="#3aada0" stroke-width="1.2"/>
+        <ellipse cx="118" cy="105" rx="18" ry="38" fill="rgba(180,240,220,0.45)" stroke="#3aada0" stroke-width="1.2"/>
+        <!-- 髪（ティール） -->
+        <ellipse cx="70" cy="42" rx="34" ry="30" fill="#4ecdc4"/>
+        <!-- 髪のふわふわ -->
+        <circle cx="38" cy="50" r="14" fill="#4ecdc4"/>
+        <circle cx="102" cy="50" r="14" fill="#4ecdc4"/>
+        <circle cx="42" cy="35" r="12" fill="#4ecdc4"/>
+        <circle cx="98" cy="35" r="12" fill="#4ecdc4"/>
+        <circle cx="70" cy="18" r="11" fill="#4ecdc4"/>
+        <!-- 顔 -->
+        <ellipse cx="70" cy="58" rx="26" ry="24" fill="#f0ebe0"/>
+        <!-- 複眼（大きな黒目） -->
+        <ellipse cx="58" cy="56" rx="11" ry="12" fill="#1a1a1a"/>
+        <ellipse cx="82" cy="56" rx="11" ry="12" fill="#1a1a1a"/>
+        <!-- 目のハイライト -->
+        <circle cx="54" cy="52" r="3.5" fill="white" opacity="0.8"/>
+        <circle cx="78" cy="52" r="3.5" fill="white" opacity="0.8"/>
+        <circle cx="56" cy="58" r="1.5" fill="white" opacity="0.5"/>
+        <circle cx="80" cy="58" r="1.5" fill="white" opacity="0.5"/>
+        <!-- ほっぺ -->
+        <ellipse cx="48" cy="67" rx="6" ry="3.5" fill="#f4a8b0" opacity="0.6"/>
+        <ellipse cx="92" cy="67" rx="6" ry="3.5" fill="#f4a8b0" opacity="0.6"/>
+        <!-- 服（デフォルト：黒Tシャツ） -->
+        <g id="outfit-layer">
+          <!-- 首 -->
+          <rect x="62" y="78" width="16" height="10" rx="3" fill="#e8e0d0"/>
+          <!-- シャツ本体 -->
+          <rect x="46" y="88" width="48" height="42" rx="6" fill="#2d2d2d" id="shirt-body"/>
+          <!-- 袖 -->
+          <rect x="30" y="88" width="18" height="28" rx="5" fill="#f0ebe0" id="sleeve-l"/>
+          <rect x="92" y="88" width="18" height="28" rx="5" fill="#f0ebe0" id="sleeve-r"/>
+          <!-- シャツテキスト -->
+          <text x="70" y="105" text-anchor="middle" font-size="6" fill="#4ecdc4" font-weight="bold" id="shirt-text1">welcom</text>
+          <text x="70" y="113" text-anchor="middle" font-size="6" fill="#f4a857" font-weight="bold" id="shirt-text2">my</text>
+          <text x="70" y="121" text-anchor="middle" font-size="6" fill="#e07a9f" font-weight="bold" id="shirt-text3">home!</text>
+          <!-- ショートパンツ -->
+          <rect x="50" y="128" width="40" height="22" rx="4" fill="#b8966e" id="pants"/>
+          <!-- 脚 -->
+          <rect x="54" y="148" width="12" height="28" rx="4" fill="#f0ebe0"/>
+          <rect x="74" y="148" width="12" height="28" rx="4" fill="#f0ebe0"/>
+          <!-- 手の先 -->
+          <ellipse cx="30" cy="118" rx="7" ry="6" fill="#f0ebe0"/>
+          <ellipse cx="110" cy="118" rx="7" ry="6" fill="#f0ebe0"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- 着替えボタン -->
+    <div class="outfit-row">
+      <button class="outfit-btn active" onclick="setOutfit('default')" id="outfit-default">🖤 デフォ</button>
+      <button class="outfit-btn" onclick="setOutfit('casual')" id="outfit-casual">💚 カジュアル</button>
+      <button class="outfit-btn" onclick="setOutfit('fancy')" id="outfit-fancy">💜 おしゃれ</button>
+      <button class="outfit-btn" onclick="setOutfit('sleep')" id="outfit-sleep">🌙 パジャマ</button>
+    </div>
+
     <div class="chara-name">ムスカムスカ</div>
     <div class="chara-level" id="chara-level">Lv.1 ・ たまご期</div>
-    <div class="mood-badge" id="mood-badge">😐 ふつう</div>
+    <div class="mood-badge" id="mood-badge" style="background:#e8f5e3;color:#5a7a48;">😐 ふつう</div>
+
     <div class="exp-row">
-      <span class="exp-label">EXP</span>
-      <div class="bar-bg"><div class="bar-fill" id="exp-bar" style="width:0%;background:var(--purple);"></div></div>
-      <span class="exp-num" id="exp-label">0/30</span>
+      <span class="exp-lbl">EXP</span>
+      <div class="bar-bg" style="flex:1"><div class="bar-fill" id="exp-bar" style="width:0%;background:#3aada0;"></div></div>
+      <span class="exp-num" id="exp-num">0/30</span>
     </div>
   </div>
 
+  <!-- なつき度・おなか -->
   <div class="card">
-    <div class="section-title">ステータス</div>
-    <div class="stat-row"><span class="stat-label">💪 ちから</span><div class="bar-bg"><div class="bar-fill" id="bar-str" style="width:10%;background:var(--coral);"></div></div><span class="stat-val" id="val-str">10</span></div>
-    <div class="stat-row"><span class="stat-label">✨ まほう</span><div class="bar-bg"><div class="bar-fill" id="bar-mag" style="width:10%;background:var(--purple);"></div></div><span class="stat-val" id="val-mag">10</span></div>
-    <div class="stat-row"><span class="stat-label">💨 すばやさ</span><div class="bar-bg"><div class="bar-fill" id="bar-spd" style="width:10%;background:var(--teal);"></div></div><span class="stat-val" id="val-spd">10</span></div>
-    <div class="stat-row"><span class="stat-label">❤️ たいりょく</span><div class="bar-bg"><div class="bar-fill" id="bar-hp" style="width:10%;background:var(--pink);"></div></div><span class="stat-val" id="val-hp">10</span></div>
-    <div class="stat-row"><span class="stat-label">🍀 こうん</span><div class="bar-bg"><div class="bar-fill" id="bar-luk" style="width:10%;background:var(--amber);"></div></div><span class="stat-val" id="val-luk">10</span></div>
+    <div class="section-title">きもち</div>
+    <div class="stat-row special-stat">
+      <span class="stat-label">💗 なつき度</span>
+      <div class="bar-bg"><div class="bar-fill" id="bar-love" style="width:30%;background:#d4537e;"></div></div>
+      <span class="stat-val" id="val-love">30</span>
+    </div>
+    <div class="stat-row special-stat">
+      <span class="stat-label">🍙 おなか</span>
+      <div class="bar-bg"><div class="bar-fill" id="bar-hunger" style="width:70%;background:#c49a2a;"></div></div>
+      <span class="stat-val" id="val-hunger">70</span>
+    </div>
   </div>
 
+  <!-- ステータス -->
+  <div class="card">
+    <div class="section-title">ステータス</div>
+    <div class="stat-row">
+      <span class="stat-label">💪 ちから</span>
+      <div class="bar-bg"><div class="bar-fill" id="bar-str" style="width:10%;background:#e07a5f;"></div></div>
+      <span class="stat-val" id="val-str">10</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">✨ まほう</span>
+      <div class="bar-bg"><div class="bar-fill" id="bar-mag" style="width:10%;background:#7f77dd;"></div></div>
+      <span class="stat-val" id="val-mag">10</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">💨 すばやさ</span>
+      <div class="bar-bg"><div class="bar-fill" id="bar-spd" style="width:10%;background:#3aada0;"></div></div>
+      <span class="stat-val" id="val-spd">10</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">❤️ たいりょく</span>
+      <div class="bar-bg"><div class="bar-fill" id="bar-hp" style="width:10%;background:#d4537e;"></div></div>
+      <span class="stat-val" id="val-hp">10</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">🍀 こうん</span>
+      <div class="bar-bg"><div class="bar-fill" id="bar-luk" style="width:10%;background:#c49a2a;"></div></div>
+      <span class="stat-val" id="val-luk">10</span>
+    </div>
+  </div>
+
+  <!-- 育てるボタン -->
   <div class="card">
     <div class="section-title">育てる</div>
     <div class="btn-grid">
-      <button id="btn-train" onclick="doAction('train')">⚔️ 修行させる</button>
-      <button id="btn-study" onclick="doAction('study')">📖 勉強させる</button>
-      <button id="btn-play"  onclick="doAction('play')">🎉 遊ばせる</button>
-      <button id="btn-rest"  onclick="doAction('rest')">🌙 休ませる</button>
+      <button class="action-btn" id="btn-train" onclick="doAction('train')">⚔️ 修行させる</button>
+      <button class="action-btn" id="btn-study" onclick="doAction('study')">📖 勉強させる</button>
+      <button class="action-btn" id="btn-play"  onclick="doAction('play')">🎉 遊ばせる</button>
+      <button class="action-btn" id="btn-rest"  onclick="doAction('rest')">🌙 休ませる</button>
+      <button class="action-btn" id="btn-feed"  onclick="doAction('feed')">🍙 ごはん</button>
+      <button class="action-btn" id="btn-pet"   onclick="doAction('pet')">🫶 なでる</button>
     </div>
     <div class="auto-wrap">
       <input type="checkbox" id="auto-cb" onchange="toggleAuto()">
-      <label for="auto-cb">オート育成（3秒ごとに自動で行動）</label>
+      <label for="auto-cb">オート育成（3秒ごとに自動行動）</label>
     </div>
   </div>
 
+  <!-- ログ -->
   <div class="card">
     <div class="section-title">ログ</div>
-    <div class="log" id="log">ムスカムスカが誕生した。大切に育てよう！🪰</div>
+    <div class="log" id="log">ムスカムスカが誕生した。大切に育てよう！</div>
   </div>
 </div>
 
-<div id="levelup-overlay"><div class="levelup-msg" id="levelup-msg"></div></div>
+<div id="lvup-overlay"><div class="lvup-msg" id="lvup-msg"></div></div>
 
 <script>
-const STAGES = [
-  { lv:1,  name:"たまご期", face:"🥚" },
-  { lv:3,  name:"子ども期", face:"🪰" },
-  { lv:6,  name:"少年期",   face:"🪰" },
-  { lv:10, name:"青年期",   face:"🪰" },
-  { lv:15, name:"大人期",   face:"🪰" },
-  { lv:20, name:"覚醒期",   face:"🪰" },
-  { lv:30, name:"伝説期",   face:"🪰" },
+const STAGES=[
+  {lv:1, name:"たまご期"},
+  {lv:3, name:"子ども期"},
+  {lv:6, name:"少年期"},
+  {lv:10,name:"青年期"},
+  {lv:15,name:"大人期"},
+  {lv:20,name:"覚醒期"},
+  {lv:30,name:"伝説期"},
 ];
-const EXP_PER_LV = lv => Math.floor(30 * Math.pow(1.35, lv - 1));
-const MOODS = [
-  { min:80, text:"😄 元気！",     bg:"rgba(99,153,34,0.2)",  col:"#97C459" },
-  { min:50, text:"😊 まあまあ",   bg:"rgba(29,158,117,0.2)", col:"#5DCAA5" },
-  { min:20, text:"😐 ふつう",     bg:"rgba(255,255,255,0.08)", col:"#a8a8c0" },
-  { min:0,  text:"😩 つかれた",   bg:"rgba(216,90,48,0.2)",  col:"#F0997B" },
+const EXP_PER_LV=lv=>Math.floor(30*Math.pow(1.35,lv-1));
+const MOODS=[
+  {min:80,text:"😄 大好き！",bg:"#d4f0e0",col:"#2d8a60"},
+  {min:60,text:"😊 なかよし",bg:"#e3f5d4",col:"#4a7a30"},
+  {min:35,text:"😐 ふつう",bg:"#e8f5e3",col:"#5a7a48"},
+  {min:10,text:"😒 そっけない",bg:"#f5ead4",col:"#8a6a20"},
+  {min:0, text:"😭 きらい…",bg:"#f5d4d4",col:"#8a3030"},
 ];
-const ACTIONS = {
-  train: { energy:-20, str:5,  spd:2,              logs:["汗だくで特訓した！💪","壁を100回殴った…","稽古で一皮むけた！"] },
-  study: { energy:-15, mag:5,  luk:2,              logs:["魔法書を読みふけった✨","難しい呪文を解読した","図書館に引きこもった…"] },
-  play:  { energy:-10, spd:3,  luk:3, mood:10,     logs:["野原を飛び回った🍀","友達と遊んで大笑い！","秘密基地で遊んだ"] },
-  rest:  { energy:40,  hp:5,   mood:20,            logs:["ぐっすり眠った💤","ぼーっとして回復した","おいしいものを食べた🍙"] },
+const ACTIONS={
+  train:{energy:-20,str:5,spd:2,hunger:-10,          logs:["汗だくで特訓した！💪","壁を100回殴った…","稽古で一皮むけた！"]},
+  study:{energy:-15,mag:5,luk:2,hunger:-8,           logs:["魔法書を読みふけった✨","難しい呪文を解読した","図書館に引きこもった…"]},
+  play: {energy:-10,spd:3,luk:3,love:+8,hunger:-5,  logs:["野原を飛び回った🍀","友達と遊んで大笑い！","秘密基地で遊んだ"]},
+  rest: {energy:+40,hp:5,hunger:-5,                  logs:["ぐっすり眠った💤","ぼーっとして回復した","ゆっくり休んだ"]},
+  feed: {hunger:+40,love:+5,energy:+5,               logs:["おいしそうに食べた🍙","もぐもぐ…おいしい！","ごはんでご機嫌に😊"]},
+  pet:  {love:+15,energy:-2,                         logs:["うれしそうにしてる💗","なでられてにこにこ🌸","すこし照れてる…かわいい"]},
+};
+const OUTFITS={
+  default:{shirtColor:"#2d2d2d",sleeveColor:"#f0ebe0",pantsColor:"#b8966e",textVis:true},
+  casual: {shirtColor:"#4ecdc4",sleeveColor:"#fff8e1",pantsColor:"#5d9e6b",textVis:false,shirtText:"casual✦"},
+  fancy:  {shirtColor:"#7f77dd",sleeveColor:"#f5d0e8",pantsColor:"#4a3580",textVis:false,shirtText:"✦fancy✦"},
+  sleep:  {shirtColor:"#b8d4f0",sleeveColor:"#d8eaf8",pantsColor:"#8aaad0",textVis:false,shirtText:"zzz…"},
 };
 
-let state = { lv:1, exp:0, str:10, mag:10, spd:10, hp:10, luk:10, energy:70, mood:50, busy:false };
-let autoTimer = null;
+let state={lv:1,exp:0,str:10,mag:10,spd:10,hp:10,luk:10,energy:70,mood:50,love:30,hunger:70,busy:false};
+let autoTimer=null;
+let currentOutfit='default';
 
-function getStage() {
-  let s = STAGES[0];
-  for (const st of STAGES) { if (state.lv >= st.lv) s = st; }
-  return s;
+function getStage(){let s=STAGES[0];for(const st of STAGES){if(state.lv>=st.lv)s=st;}return s;}
+function getMood(){
+  const idx=Math.max(0,Math.min(99,Math.round(state.love)));
+  for(const m of MOODS){if(idx>=m.min)return m;}return MOODS[MOODS.length-1];
 }
-function getMood() {
-  for (const m of MOODS) { if (state.mood >= m.min) return m; }
-  return MOODS[MOODS.length-1];
-}
-function cap(v, mn=0, mx=100) { return Math.min(mx, Math.max(mn, v)); }
+function cap(v,mn=0,mx=100){return Math.min(mx,Math.max(mn,v));}
 
-function doAction(type) {
-  if (state.busy) return;
-  const a = ACTIONS[type];
-  if (a.energy < 0 && state.energy + a.energy < 0) {
-    addLog("エネルギーが足りない…休ませよう。😮‍💨");
-    return;
-  }
-  state.busy = true;
-  setBtns(true);
-  const log = a.logs[Math.floor(Math.random() * a.logs.length)];
-  addLog(log);
-  if (a.energy) state.energy = cap(state.energy + a.energy);
-  if (a.str)   state.str  = cap(state.str  + a.str,  0, 999);
-  if (a.mag)   state.mag  = cap(state.mag  + a.mag,  0, 999);
-  if (a.spd)   state.spd  = cap(state.spd  + a.spd,  0, 999);
-  if (a.hp)    state.hp   = cap(state.hp   + a.hp,   0, 999);
-  if (a.luk)   state.luk  = cap(state.luk  + a.luk,  0, 999);
-  if (a.mood)  state.mood = cap(state.mood + a.mood);
-  else if (a.energy < 0) state.mood = cap(state.mood - 5);
-  state.exp += Math.floor(Math.random()*6)+3;
-  checkLevelUp();
-  bounceChara();
-  render();
-  setTimeout(() => { state.busy = false; setBtns(false); }, 600);
-}
-
-function checkLevelUp() {
-  let needed = EXP_PER_LV(state.lv);
-  while (state.exp >= needed) {
-    state.exp -= needed;
-    state.lv++;
-    showLevelUp(state.lv);
-    needed = EXP_PER_LV(state.lv);
-  }
-}
-
-function showLevelUp(lv) {
-  const el = document.getElementById('levelup-msg');
-  el.textContent = `🎉 Lv.${lv} レベルアップ！`;
-  el.style.display = 'block';
-  el.style.animation = 'none';
-  void el.offsetWidth;
-  el.style.animation = 'lvup 1.2s ease forwards';
-  setTimeout(() => { el.style.display = 'none'; }, 1200);
-}
-
-function bounceChara() {
-  const f = document.getElementById('chara-face');
-  f.classList.remove('bounce');
-  void f.offsetWidth;
-  f.classList.add('bounce');
-}
-
-function addLog(msg) {
-  const el = document.getElementById('log');
-  el.textContent = msg;
-  el.classList.remove('log-flash');
-  void el.offsetWidth;
-  el.classList.add('log-flash');
-}
-
-function setBtns(disabled) {
-  ['btn-train','btn-study','btn-play','btn-rest'].forEach(id => {
-    document.getElementById(id).disabled = disabled;
-  });
-}
-
-function render() {
-  const stage = getStage();
-  const mood = getMood();
-  const needed = EXP_PER_LV(state.lv);
-  document.getElementById('chara-face').textContent = stage.face;
-  document.getElementById('chara-level').textContent = `Lv.${state.lv} ・ ${stage.name}`;
-  const mb = document.getElementById('mood-badge');
-  mb.textContent = mood.text;
-  mb.style.background = mood.bg;
-  mb.style.color = mood.col;
-  const expPct = Math.min(100, Math.round(state.exp / needed * 100));
-  document.getElementById('exp-bar').style.width = expPct + '%';
-  document.getElementById('exp-label').textContent = `${state.exp}/${needed}`;
-  const stats = {str:'str', mag:'mag', spd:'spd', hp:'hp', luk:'luk'};
-  for (const [key, id] of Object.entries(stats)) {
-    const v = state[key];
-    document.getElementById('bar-'+id).style.width = Math.min(100, Math.round(v)) + '%';
-    document.getElementById('val-'+id).textContent = v;
-  }
-}
-
-function toggleAuto() {
-  const cb = document.getElementById('auto-cb');
-  if (cb.checked) {
-    const acts = ['train','study','play','rest'];
-    autoTimer = setInterval(() => {
-      doAction(acts[Math.floor(Math.random()*acts.length)]);
-    }, 3000);
+function setOutfit(name){
+  currentOutfit=name;
+  const o=OUTFITS[name];
+  document.getElementById('shirt-body').setAttribute('fill',o.shirtColor);
+  document.getElementById('sleeve-l').setAttribute('fill',o.sleeveColor);
+  document.getElementById('sleeve-r').setAttribute('fill',o.sleeveColor);
+  document.getElementById('pants').setAttribute('fill',o.pantsColor);
+  const t1=document.getElementById('shirt-text1');
+  const t2=document.getElementById('shirt-text2');
+  const t3=document.getElementById('shirt-text3');
+  if(o.textVis){
+    t1.style.display='';t2.style.display='';t3.style.display='';
+    t1.setAttribute('fill','#4ecdc4');
+    t2.setAttribute('fill','#f4a857');
+    t3.setAttribute('fill','#e07a9f');
   } else {
-    clearInterval(autoTimer);
-    autoTimer = null;
+    t1.style.display='none';t2.style.display='none';t3.style.display='';
+    t3.setAttribute('y','113');t3.setAttribute('fill','rgba(255,255,255,0.5)');
+    t3.textContent=o.shirtText||'';
+    t1.style.display='none';t2.style.display='none';
+  }
+  document.querySelectorAll('.outfit-btn').forEach(b=>{
+    b.classList.toggle('active',b.id==='outfit-'+name);
+  });
+  bounceChara();
+}
+
+function doAction(type){
+  if(state.busy)return;
+  const a=ACTIONS[type];
+  if(a.energy&&a.energy<0&&state.energy+a.energy<0){
+    addLog("エネルギーが足りない…休ませよう。😮‍💨");return;
+  }
+  state.busy=true;setBtns(true);
+  addLog(a.logs[Math.floor(Math.random()*a.logs.length)]);
+  if(a.energy) state.energy=cap(state.energy+a.energy);
+  if(a.str)    state.str=cap(state.str+a.str,0,999);
+  if(a.mag)    state.mag=cap(state.mag+a.mag,0,999);
+  if(a.spd)    state.spd=cap(state.spd+a.spd,0,999);
+  if(a.hp)     state.hp=cap(state.hp+a.hp,0,999);
+  if(a.luk)    state.luk=cap(state.luk+a.luk,0,999);
+  if(a.love)   state.love=cap(state.love+a.love);
+  if(a.hunger) state.hunger=cap(state.hunger+a.hunger);
+  state.exp+=Math.floor(Math.random()*6)+3;
+  checkLevelUp();bounceChara();render();
+  setTimeout(()=>{state.busy=false;setBtns(false);},600);
+}
+
+function checkLevelUp(){
+  let needed=EXP_PER_LV(state.lv);
+  while(state.exp>=needed){
+    state.exp-=needed;state.lv++;
+    showLvUp(state.lv);needed=EXP_PER_LV(state.lv);
+  }
+}
+function showLvUp(lv){
+  const el=document.getElementById('lvup-msg');
+  el.textContent=`🎉 Lv.${lv} レベルアップ！`;
+  el.style.display='block';el.style.animation='none';
+  void el.offsetWidth;el.style.animation='lvup 1.3s ease forwards';
+  setTimeout(()=>{el.style.display='none';},1300);
+}
+function bounceChara(){
+  const w=document.getElementById('chara-svg-wrap');
+  w.classList.remove('bounce');void w.offsetWidth;w.classList.add('bounce');
+}
+function addLog(msg){
+  const el=document.getElementById('log');el.textContent=msg;
+  el.classList.remove('log-flash');void el.offsetWidth;el.classList.add('log-flash');
+}
+function setBtns(d){
+  ['btn-train','btn-study','btn-play','btn-rest','btn-feed','btn-pet']
+    .forEach(id=>{document.getElementById(id).disabled=d;});
+}
+
+function render(){
+  const stage=getStage();const mood=getMood();
+  const needed=EXP_PER_LV(state.lv);
+  document.getElementById('chara-level').textContent=`Lv.${state.lv} ・ ${stage.name}`;
+  const mb=document.getElementById('mood-badge');
+  mb.textContent=mood.text;mb.style.background=mood.bg;mb.style.color=mood.col;
+  const expPct=Math.min(100,Math.round(state.exp/needed*100));
+  document.getElementById('exp-bar').style.width=expPct+'%';
+  document.getElementById('exp-num').textContent=`${state.exp}/${needed}`;
+  const stats={str:'str',mag:'mag',spd:'spd',hp:'hp',luk:'luk'};
+  for(const[k,id]of Object.entries(stats)){
+    document.getElementById('bar-'+id).style.width=Math.min(100,state[k])+'%';
+    document.getElementById('val-'+id).textContent=state[k];
+  }
+  document.getElementById('bar-love').style.width=state.love+'%';
+  document.getElementById('val-love').textContent=state.love;
+  document.getElementById('bar-hunger').style.width=state.hunger+'%';
+  document.getElementById('val-hunger').textContent=state.hunger;
+  // おなかが0になったら警告
+  if(state.hunger<=10&&state.hunger>0){
+    addLog("おなかがすいた…ごはんをちょうだい🍙");
+    state.love=cap(state.love-1);
+  }
+}
+
+function toggleAuto(){
+  const cb=document.getElementById('auto-cb');
+  if(cb.checked){
+    const acts=['train','study','play','rest','feed','pet'];
+    autoTimer=setInterval(()=>{
+      // おなかが少ないときはごはん優先
+      if(state.hunger<25)doAction('feed');
+      else doAction(acts[Math.floor(Math.random()*acts.length)]);
+    },3000);
+  } else {
+    clearInterval(autoTimer);autoTimer=null;
   }
 }
 
