@@ -47,12 +47,16 @@ body{
   pointer-events:none;
 }
 
-/* SVGキャラクター */
-#chara-svg-wrap{
-  width:140px;height:180px;margin:0 auto 4px;
-  position:relative;
+/* キャラクター画像 */
+#chara-img-wrap{
+  width:180px;height:220px;margin:0 auto 4px;
+  display:flex;align-items:center;justify-content:center;
 }
-#chara-svg-wrap svg{width:100%;height:100%;}
+#chara-img{
+  max-width:100%;max-height:100%;
+  object-fit:contain;
+  transition:opacity 0.3s;
+}
 
 /* 着替えボタン */
 .outfit-row{
@@ -169,71 +173,7 @@ button.action-btn:disabled{opacity:0.35;cursor:default;}
   </div>
 
   <div class="chara-card">
-    <div id="chara-svg-wrap">
-      <!-- SVGキャラクター：ムスカムスカちゃん -->
-      <svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg" id="chara-svg">
-        <defs>
-          <radialGradient id="glowGrad" cx="50%" cy="40%" r="50%">
-            <stop offset="0%" stop-color="#b8f0d8" stop-opacity="0.6"/>
-            <stop offset="100%" stop-color="#7adec0" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-        <!-- 後光 -->
-        <ellipse cx="70" cy="80" rx="56" ry="68" fill="url(#glowGrad)"/>
-        <!-- 触角 -->
-        <line x1="56" y1="22" x2="44" y2="4" stroke="#3aada0" stroke-width="2.5" stroke-linecap="round"/>
-        <circle cx="44" cy="3" r="3" fill="#3aada0"/>
-        <line x1="84" y1="22" x2="96" y2="4" stroke="#3aada0" stroke-width="2.5" stroke-linecap="round"/>
-        <circle cx="96" cy="3" r="3" fill="#3aada0"/>
-        <!-- 羽（透明感） -->
-        <ellipse cx="22" cy="105" rx="18" ry="38" fill="rgba(180,240,220,0.45)" stroke="#3aada0" stroke-width="1.2"/>
-        <ellipse cx="118" cy="105" rx="18" ry="38" fill="rgba(180,240,220,0.45)" stroke="#3aada0" stroke-width="1.2"/>
-        <!-- 髪（ティール） -->
-        <ellipse cx="70" cy="42" rx="34" ry="30" fill="#4ecdc4"/>
-        <!-- 髪のふわふわ -->
-        <circle cx="38" cy="50" r="14" fill="#4ecdc4"/>
-        <circle cx="102" cy="50" r="14" fill="#4ecdc4"/>
-        <circle cx="42" cy="35" r="12" fill="#4ecdc4"/>
-        <circle cx="98" cy="35" r="12" fill="#4ecdc4"/>
-        <circle cx="70" cy="18" r="11" fill="#4ecdc4"/>
-        <!-- 顔 -->
-        <ellipse cx="70" cy="58" rx="26" ry="24" fill="#f0ebe0"/>
-        <!-- 複眼（大きな黒目） -->
-        <ellipse cx="58" cy="56" rx="11" ry="12" fill="#1a1a1a"/>
-        <ellipse cx="82" cy="56" rx="11" ry="12" fill="#1a1a1a"/>
-        <!-- 目のハイライト -->
-        <circle cx="54" cy="52" r="3.5" fill="white" opacity="0.8"/>
-        <circle cx="78" cy="52" r="3.5" fill="white" opacity="0.8"/>
-        <circle cx="56" cy="58" r="1.5" fill="white" opacity="0.5"/>
-        <circle cx="80" cy="58" r="1.5" fill="white" opacity="0.5"/>
-        <!-- ほっぺ -->
-        <ellipse cx="48" cy="67" rx="6" ry="3.5" fill="#f4a8b0" opacity="0.6"/>
-        <ellipse cx="92" cy="67" rx="6" ry="3.5" fill="#f4a8b0" opacity="0.6"/>
-        <!-- 服（デフォルト：黒Tシャツ） -->
-        <g id="outfit-layer">
-          <!-- 首 -->
-          <rect x="62" y="78" width="16" height="10" rx="3" fill="#e8e0d0"/>
-          <!-- シャツ本体 -->
-          <rect x="46" y="88" width="48" height="42" rx="6" fill="#2d2d2d" id="shirt-body"/>
-          <!-- 袖 -->
-          <rect x="30" y="88" width="18" height="28" rx="5" fill="#f0ebe0" id="sleeve-l"/>
-          <rect x="92" y="88" width="18" height="28" rx="5" fill="#f0ebe0" id="sleeve-r"/>
-          <!-- シャツテキスト -->
-          <text x="70" y="105" text-anchor="middle" font-size="6" fill="#4ecdc4" font-weight="bold" id="shirt-text1">welcom</text>
-          <text x="70" y="113" text-anchor="middle" font-size="6" fill="#f4a857" font-weight="bold" id="shirt-text2">my</text>
-          <text x="70" y="121" text-anchor="middle" font-size="6" fill="#e07a9f" font-weight="bold" id="shirt-text3">home!</text>
-          <!-- ショートパンツ -->
-          <rect x="50" y="128" width="40" height="22" rx="4" fill="#b8966e" id="pants"/>
-          <!-- 脚 -->
-          <rect x="54" y="148" width="12" height="28" rx="4" fill="#f0ebe0"/>
-          <rect x="74" y="148" width="12" height="28" rx="4" fill="#f0ebe0"/>
-          <!-- 手の先 -->
-          <ellipse cx="30" cy="118" rx="7" ry="6" fill="#f0ebe0"/>
-          <ellipse cx="110" cy="118" rx="7" ry="6" fill="#f0ebe0"/>
-        </g>
-      </svg>
-    </div>
-
+    <div id="chara-img-wrap"><img id="chara-img" src="egg_default.png" alt="ムスカムスカ"></div>
     <!-- 着替えボタン -->
     <div class="outfit-row">
       <button class="outfit-btn active" onclick="setOutfit('default')" id="outfit-default">🖤 デフォ</button>
@@ -326,13 +266,13 @@ button.action-btn:disabled{opacity:0.35;cursor:default;}
 
 <script>
 const STAGES=[
-  {lv:1, name:"たまご期"},
-  {lv:3, name:"子ども期"},
-  {lv:6, name:"少年期"},
-  {lv:10,name:"青年期"},
-  {lv:15,name:"大人期"},
-  {lv:20,name:"覚醒期"},
-  {lv:30,name:"伝説期"},
+  {lv:1, name:"たまご期", img:"egg"},
+  {lv:3, name:"子ども期", img:"child"},
+  {lv:6, name:"少年期",   img:"child"},
+  {lv:10,name:"青年期",   img:"adult"},
+  {lv:15,name:"大人期",   img:"adult"},
+  {lv:20,name:"覚醒期",   img:"legend"},
+  {lv:30,name:"伝説期",   img:"legend"},
 ];
 const EXP_PER_LV=lv=>Math.floor(30*Math.pow(1.35,lv-1));
 const MOODS=[
@@ -410,29 +350,19 @@ function cap(v,mn=0,mx=100){return Math.min(mx,Math.max(mn,v));}
 
 function setOutfit(name){
   currentOutfit=name;
-  const o=OUTFITS[name];
-  document.getElementById('shirt-body').setAttribute('fill',o.shirtColor);
-  document.getElementById('sleeve-l').setAttribute('fill',o.sleeveColor);
-  document.getElementById('sleeve-r').setAttribute('fill',o.sleeveColor);
-  document.getElementById('pants').setAttribute('fill',o.pantsColor);
-  const t1=document.getElementById('shirt-text1');
-  const t2=document.getElementById('shirt-text2');
-  const t3=document.getElementById('shirt-text3');
-  if(o.textVis){
-    t1.style.display='';t2.style.display='';t3.style.display='';
-    t1.setAttribute('fill','#4ecdc4');
-    t2.setAttribute('fill','#f4a857');
-    t3.setAttribute('fill','#e07a9f');
-  } else {
-    t1.style.display='none';t2.style.display='none';t3.style.display='';
-    t3.setAttribute('y','113');t3.setAttribute('fill','rgba(255,255,255,0.5)');
-    t3.textContent=o.shirtText||'';
-    t1.style.display='none';t2.style.display='none';
-  }
+  updateCharaImg();
   document.querySelectorAll('.outfit-btn').forEach(b=>{
     b.classList.toggle('active',b.id==='outfit-'+name);
   });
   bounceChara();
+}
+
+function updateCharaImg(){
+  const stage=getStage();
+  const src=`${stage.img}_${currentOutfit}.png`;
+  const img=document.getElementById('chara-img');
+  img.style.opacity='0';
+  setTimeout(()=>{img.src=src;img.style.opacity='1';},150);
 }
 
 function doAction(type){
@@ -471,7 +401,7 @@ function showLvUp(lv){
   setTimeout(()=>{el.style.display='none';},1300);
 }
 function bounceChara(){
-  const w=document.getElementById('chara-svg-wrap');
+  const w=document.getElementById('chara-img-wrap');
   w.classList.remove('bounce');void w.offsetWidth;w.classList.add('bounce');
 }
 function addLog(msg){
@@ -487,6 +417,7 @@ function render(){
   const stage=getStage();const mood=getMood();
   const needed=EXP_PER_LV(state.lv);
   document.getElementById('chara-level').textContent=`Lv.${state.lv} ・ ${stage.name}`;
+  updateCharaImg();
   const mb=document.getElementById('mood-badge');
   mb.textContent=mood.text;mb.style.background=mood.bg;mb.style.color=mood.col;
   const expPct=Math.min(100,Math.round(state.exp/needed*100));
