@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ムスカムスカ育成ゲーム</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #1a1a2e;
+  --bg2: #16213e;
+  --bg3: #0f3460;
+  --accent: #e94560;
+  --accent2: #f5a623;
+  --text: #eaeaea;
+  --text2: #a8a8c0;
+  --card: rgba(255,255,255,0.05);
+  --border: rgba(255,255,255,0.1);
+  --purple: #7f77dd;
+  --teal: #1d9e75;
+  --coral: #d85a30;
+  --pink: #d4537e;
+  --amber: #ba7517;
+  --green: #639922;
+}
+
+body {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(127,119,221,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(233,69,96,0.1) 0%, transparent 50%);
+}
+
+#app {
+  width: 100%;
+  max-width: 420px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.25rem;
+  margin-bottom: 12px;
+  backdrop-filter: blur(10px);
+}
+
+/* キャラカード */
+.chara-card {
+  text-align: center;
+  background: linear-gradient(135deg, rgba(127,119,221,0.15), rgba(233,69,96,0.1));
+  border-color: rgba(127,119,221,0.3);
+  position: relative;
+  overflow: hidden;
+}
+.chara-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(127,119,221,0.1), transparent 70%);
+  pointer-events: none;
+}
+
+.chara-face {
+  font-size: 72px;
+  line-height: 1;
+  margin: 4px 0;
+  display: inline-block;
+  filter: drop-shadow(0 0 12px rgba(127,119,221,0.4));
+  transition: transform 0.3s ease;
+}
+.chara-face.bounce {
+  animation: bounce 0.4s ease;
+}
+@keyframes bounce {
+  0%,100% { transform: scale(1); }
+  40% { transform: scale(1.2) rotate(-5deg); }
+  70% { transform: scale(0.95) rotate(3deg); }
+}
+
+.chara-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 6px;
+  letter-spacing: 0.05em;
+}
+.chara-level {
+  font-size: 13px;
+  color: var(--text2);
+  margin-top: 2px;
+}
+
+.mood-badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 3px 14px;
+  border-radius: 100px;
+  margin-top: 8px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.exp-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.exp-label { font-size: 12px; color: var(--text2); white-space: nowrap; }
+.bar-bg {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.1);
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s cubic-bezier(0.34,1.56,0.64,1);
+}
+.exp-num { font-size: 12px; color: var(--text2); white-space: nowrap; }
+
+/* ステータス */
+.section-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 9px;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--text2);
+  width: 68px;
+  flex-shrink: 0;
+}
+.stat-val {
+  font-size: 12px;
+  font-weight: 700;
+  width: 36px;
+  text-align: right;
+  color: var(--text);
+}
+
+/* ボタン */
+.btn-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+button {
+  cursor: pointer;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 11px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  letter-spacing: 0.02em;
+}
+button:hover:not(:disabled) {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(127,119,221,0.5);
+  transform: translateY(-1px);
+}
+button:active:not(:disabled) {
+  transform: scale(0.97) translateY(0);
+}
+button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* オートチェック */
+.auto-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+.auto-wrap input[type=checkbox] { accent-color: var(--purple); width: 14px; height: 14px; cursor: pointer; }
+.auto-wrap label { font-size: 12px; color: var(--text2); cursor: pointer; }
+
+/* ログ */
+.log {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.7;
+  min-height: 44px;
+  transition: opacity 0.2s;
+}
+.log-flash {
+  animation: logflash 0.3s ease;
+}
+@keyframes logflash {
+  0% { opacity: 0; transform: translateY(4px); }
+  100% { opacity: 1; transform: none; }
+}
+
+/* レベルアップ演出 */
+#levelup-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 99;
+}
+.levelup-msg {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffd700;
+  text-shadow: 0 0 20px rgba(255,215,0,0.6);
+  animation: lvup 1.2s ease forwards;
+  display: none;
+}
+@keyframes lvup {
+  0% { opacity: 0; transform: scale(0.5) translateY(20px); }
+  30% { opacity: 1; transform: scale(1.1) translateY(0); }
+  70% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.9) translateY(-20px); }
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <div class="card chara-card">
+    <div class="chara-face" id="chara-face">🪰</div>
+    <div class="chara-name">ムスカムスカ</div>
+    <div class="chara-level" id="chara-level">Lv.1 ・ たまご期</div>
+    <div class="mood-badge" id="mood-badge">😐 ふつう</div>
+    <div class="exp-row">
+      <span class="exp-label">EXP</span>
+      <div class="bar-bg"><div class="bar-fill" id="exp-bar" style="width:0%;background:var(--purple);"></div></div>
+      <span class="exp-num" id="exp-label">0/30</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">ステータス</div>
+    <div class="stat-row"><span class="stat-label">💪 ちから</span><div class="bar-bg"><div class="bar-fill" id="bar-str" style="width:10%;background:var(--coral);"></div></div><span class="stat-val" id="val-str">10</span></div>
+    <div class="stat-row"><span class="stat-label">✨ まほう</span><div class="bar-bg"><div class="bar-fill" id="bar-mag" style="width:10%;background:var(--purple);"></div></div><span class="stat-val" id="val-mag">10</span></div>
+    <div class="stat-row"><span class="stat-label">💨 すばやさ</span><div class="bar-bg"><div class="bar-fill" id="bar-spd" style="width:10%;background:var(--teal);"></div></div><span class="stat-val" id="val-spd">10</span></div>
+    <div class="stat-row"><span class="stat-label">❤️ たいりょく</span><div class="bar-bg"><div class="bar-fill" id="bar-hp" style="width:10%;background:var(--pink);"></div></div><span class="stat-val" id="val-hp">10</span></div>
+    <div class="stat-row"><span class="stat-label">🍀 こうん</span><div class="bar-bg"><div class="bar-fill" id="bar-luk" style="width:10%;background:var(--amber);"></div></div><span class="stat-val" id="val-luk">10</span></div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">育てる</div>
+    <div class="btn-grid">
+      <button id="btn-train" onclick="doAction('train')">⚔️ 修行させる</button>
+      <button id="btn-study" onclick="doAction('study')">📖 勉強させる</button>
+      <button id="btn-play"  onclick="doAction('play')">🎉 遊ばせる</button>
+      <button id="btn-rest"  onclick="doAction('rest')">🌙 休ませる</button>
+    </div>
+    <div class="auto-wrap">
+      <input type="checkbox" id="auto-cb" onchange="toggleAuto()">
+      <label for="auto-cb">オート育成（3秒ごとに自動で行動）</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">ログ</div>
+    <div class="log" id="log">ムスカムスカが誕生した。大切に育てよう！🪰</div>
+  </div>
+</div>
+
+<div id="levelup-overlay"><div class="levelup-msg" id="levelup-msg"></div></div>
+
+<script>
+const STAGES = [
+  { lv:1,  name:"たまご期", face:"🥚" },
+  { lv:3,  name:"子ども期", face:"🪰" },
+  { lv:6,  name:"少年期",   face:"🪰" },
+  { lv:10, name:"青年期",   face:"🪰" },
+  { lv:15, name:"大人期",   face:"🪰" },
+  { lv:20, name:"覚醒期",   face:"🪰" },
+  { lv:30, name:"伝説期",   face:"🪰" },
+];
+const EXP_PER_LV = lv => Math.floor(30 * Math.pow(1.35, lv - 1));
+const MOODS = [
+  { min:80, text:"😄 元気！",     bg:"rgba(99,153,34,0.2)",  col:"#97C459" },
+  { min:50, text:"😊 まあまあ",   bg:"rgba(29,158,117,0.2)", col:"#5DCAA5" },
+  { min:20, text:"😐 ふつう",     bg:"rgba(255,255,255,0.08)", col:"#a8a8c0" },
+  { min:0,  text:"😩 つかれた",   bg:"rgba(216,90,48,0.2)",  col:"#F0997B" },
+];
+const ACTIONS = {
+  train: { energy:-20, str:5,  spd:2,              logs:["汗だくで特訓した！💪","壁を100回殴った…","稽古で一皮むけた！"] },
+  study: { energy:-15, mag:5,  luk:2,              logs:["魔法書を読みふけった✨","難しい呪文を解読した","図書館に引きこもった…"] },
+  play:  { energy:-10, spd:3,  luk:3, mood:10,     logs:["野原を飛び回った🍀","友達と遊んで大笑い！","秘密基地で遊んだ"] },
+  rest:  { energy:40,  hp:5,   mood:20,            logs:["ぐっすり眠った💤","ぼーっとして回復した","おいしいものを食べた🍙"] },
+};
+
+let state = { lv:1, exp:0, str:10, mag:10, spd:10, hp:10, luk:10, energy:70, mood:50, busy:false };
+let autoTimer = null;
+
+function getStage() {
+  let s = STAGES[0];
+  for (const st of STAGES) { if (state.lv >= st.lv) s = st; }
+  return s;
+}
+function getMood() {
+  for (const m of MOODS) { if (state.mood >= m.min) return m; }
+  return MOODS[MOODS.length-1];
+}
+function cap(v, mn=0, mx=100) { return Math.min(mx, Math.max(mn, v)); }
+
+function doAction(type) {
+  if (state.busy) return;
+  const a = ACTIONS[type];
+  if (a.energy < 0 && state.energy + a.energy < 0) {
+    addLog("エネルギーが足りない…休ませよう。😮‍💨");
+    return;
+  }
+  state.busy = true;
+  setBtns(true);
+  const log = a.logs[Math.floor(Math.random() * a.logs.length)];
+  addLog(log);
+  if (a.energy) state.energy = cap(state.energy + a.energy);
+  if (a.str)   state.str  = cap(state.str  + a.str,  0, 999);
+  if (a.mag)   state.mag  = cap(state.mag  + a.mag,  0, 999);
+  if (a.spd)   state.spd  = cap(state.spd  + a.spd,  0, 999);
+  if (a.hp)    state.hp   = cap(state.hp   + a.hp,   0, 999);
+  if (a.luk)   state.luk  = cap(state.luk  + a.luk,  0, 999);
+  if (a.mood)  state.mood = cap(state.mood + a.mood);
+  else if (a.energy < 0) state.mood = cap(state.mood - 5);
+  state.exp += Math.floor(Math.random()*6)+3;
+  checkLevelUp();
+  bounceChara();
+  render();
+  setTimeout(() => { state.busy = false; setBtns(false); }, 600);
+}
+
+function checkLevelUp() {
+  let needed = EXP_PER_LV(state.lv);
+  while (state.exp >= needed) {
+    state.exp -= needed;
+    state.lv++;
+    showLevelUp(state.lv);
+    needed = EXP_PER_LV(state.lv);
+  }
+}
+
+function showLevelUp(lv) {
+  const el = document.getElementById('levelup-msg');
+  el.textContent = `🎉 Lv.${lv} レベルアップ！`;
+  el.style.display = 'block';
+  el.style.animation = 'none';
+  void el.offsetWidth;
+  el.style.animation = 'lvup 1.2s ease forwards';
+  setTimeout(() => { el.style.display = 'none'; }, 1200);
+}
+
+function bounceChara() {
+  const f = document.getElementById('chara-face');
+  f.classList.remove('bounce');
+  void f.offsetWidth;
+  f.classList.add('bounce');
+}
+
+function addLog(msg) {
+  const el = document.getElementById('log');
+  el.textContent = msg;
+  el.classList.remove('log-flash');
+  void el.offsetWidth;
+  el.classList.add('log-flash');
+}
+
+function setBtns(disabled) {
+  ['btn-train','btn-study','btn-play','btn-rest'].forEach(id => {
+    document.getElementById(id).disabled = disabled;
+  });
+}
+
+function render() {
+  const stage = getStage();
+  const mood = getMood();
+  const needed = EXP_PER_LV(state.lv);
+  document.getElementById('chara-face').textContent = stage.face;
+  document.getElementById('chara-level').textContent = `Lv.${state.lv} ・ ${stage.name}`;
+  const mb = document.getElementById('mood-badge');
+  mb.textContent = mood.text;
+  mb.style.background = mood.bg;
+  mb.style.color = mood.col;
+  const expPct = Math.min(100, Math.round(state.exp / needed * 100));
+  document.getElementById('exp-bar').style.width = expPct + '%';
+  document.getElementById('exp-label').textContent = `${state.exp}/${needed}`;
+  const stats = {str:'str', mag:'mag', spd:'spd', hp:'hp', luk:'luk'};
+  for (const [key, id] of Object.entries(stats)) {
+    const v = state[key];
+    document.getElementById('bar-'+id).style.width = Math.min(100, Math.round(v)) + '%';
+    document.getElementById('val-'+id).textContent = v;
+  }
+}
+
+function toggleAuto() {
+  const cb = document.getElementById('auto-cb');
+  if (cb.checked) {
+    const acts = ['train','study','play','rest'];
+    autoTimer = setInterval(() => {
+      doAction(acts[Math.floor(Math.random()*acts.length)]);
+    }, 3000);
+  } else {
+    clearInterval(autoTimer);
+    autoTimer = null;
+  }
+}
+
+render();
+</script>
+</body>
+</html>
