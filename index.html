@@ -550,9 +550,9 @@ function tryNatsukiEvent(){
   if(state.love<80)return;
   if(state.lv<3)return;
   const now=Date.now();
-  if(now-lastNatsukiCheck<8000)return;
+  if(now-lastNatsukiCheck<180000)return;
   lastNatsukiCheck=now;
-  if(Math.random()>0.25)return;
+  if(Math.random()>0.05)return;
   const ev=NATSUKI_EVENTS[Math.floor(Math.random()*NATSUKI_EVENTS.length)];
   const stage=getStage();
   const imgFile=`event_${ev.key}_${stage.img}.png`;
