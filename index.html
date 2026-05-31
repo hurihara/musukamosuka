@@ -149,6 +149,10 @@ button.action-btn.highlight{border-color:var(--teal);background:rgba(58,173,160,
   <!-- きもち -->
   <div class="card">
     <div class="section-title">きもち</div>
+    <div class="stat-row" style="margin-bottom:10px;">
+      <span class="stat-label">🪰 性格</span>
+      <span id="personality-badge" style="font-size:12px;font-weight:700;padding:3px 12px;border-radius:100px;background:#e8f5e3;color:#3aada0;">まだわからない</span>
+    </div>
     <div class="stat-row special-stat">
       <span class="stat-label">💗 なつき度</span>
       <div class="bar-bg"><div class="bar-fill" id="bar-love" style="width:30%;background:#d4537e;"></div></div>
@@ -311,11 +315,54 @@ const ACTIONS={
   pet:  {love:15,energy:-2, logs:["（うれしそうにしてる）💗","（なでられてにこにこしてる）🌸","（すこし照れてる…かわいい）"]},
 };
 
+
+// 性格定義
+const PERSONALITIES={
+  train:  {name:"やんちゃ",    emoji:"💪", color:"#e07a5f", bg:"#fdeee8",
+           desc:"ちからの成長が1.5倍。でもなつき度が上がりにくい。",
+           strMult:1.5, loveMult:0.7},
+  study:  {name:"物知り",      emoji:"📖", color:"#7f77dd", bg:"#eeedf8",
+           desc:"まほうの成長が1.5倍。おなかが減りにくい。",
+           magMult:1.5, hungerMult:0.7},
+  play:   {name:"陽気",        emoji:"🎉", color:"#c49a2a", bg:"#fdf3d8",
+           desc:"こうんの成長が1.5倍。なつき度の上下が激しい。",
+           lukMult:1.5, loveMult:1.4, loveDecayMult:1.4},
+  rest:   {name:"のんびり",    emoji:"🌙", color:"#3aada0", bg:"#e0f5f3",
+           desc:"たいりょくの成長が1.5倍。エネルギーの回復が速い。",
+           hpMult:1.5, energyRestMult:1.5},
+  bath:   {name:"きれい好き",  emoji:"🛁", color:"#5aaddd", bg:"#e0f0fa",
+           desc:"清潔度が下がりにくい。お風呂の効果が1.5倍。",
+           cleanDecayMult:0.5, bathMult:1.5},
+  pet:    {name:"あまえんぼ",  emoji:"🫶", color:"#d4537e", bg:"#fde8ef",
+           desc:"なつき度が上がりやすい。でも下がりやすい。",
+           loveMult:1.5, loveDecayMult:1.5},
+  feed:   {name:"食いしん坊",  emoji:"🍙", color:"#ba7517", bg:"#fdf0d8",
+           desc:"ごはんの効果が1.5倍。おなかが減りやすい。",
+           feedMult:1.5, hungerMult:1.3},
+  walk:   {name:"さすらい",    emoji:"🚶", color:"#2d8a60", bg:"#d4f0e0",
+           desc:"お散歩のEXPが1.5倍。清潔度が下がりにくい。",
+           walkExpMult:1.5, cleanDecayMult:0.6},
+};
+
+function getPersonality(){
+  const counts=state.actionCount||{};
+  let maxKey=null, maxVal=0, total=0;
+  for(const[k,v]of Object.entries(counts)){total+=v;if(v>maxVal){maxVal=v;maxKey=k;}}
+  if(total<10||!maxKey)return null;
+  return PERSONALITIES[maxKey]||null;
+}
+
+function applyPersonalityMult(type, baseVal){
+  const p=getPersonality();
+  if(!p)return baseVal;
+  const key=type+'Mult';
+  return p[key]?Math.round(baseVal*p[key]):baseVal;
+}
 const SAVE_KEY='musukamosuka_save';
-const DEFAULT_STATE={lv:1,exp:0,str:10,mag:10,spd:10,hp:10,luk:10,energy:70,love:30,hunger:70,clean:80,busy:false};
+const DEFAULT_STATE={lv:1,exp:0,str:10,mag:10,spd:10,hp:10,luk:10,energy:70,love:30,hunger:70,clean:80,busy:false,actionCount:{train:0,study:0,play:0,rest:0,bath:0,pet:0,feed:0,walk:0}};
 
 function saveGame(){
-  const data={state:{...state,busy:false},outfit:currentOutfit,snacks:[...snackStock],savedAt:Date.now()};
+  const data={state:{...state,busy:false},outfit:currentOutfit,snacks:[...snackStock],savedAt:Date.now(),actionCount:state.actionCount||{}};
   localStorage.setItem(SAVE_KEY,JSON.stringify(data));
   updateSaveInfo();
 }
@@ -324,7 +371,7 @@ function loadGame(){
     const raw=localStorage.getItem(SAVE_KEY);
     if(!raw)return false;
     const data=JSON.parse(raw);
-    state={...DEFAULT_STATE,...data.state,busy:false};
+    state={...DEFAULT_STATE,...data.state,busy:false,actionCount:{...DEFAULT_STATE.actionCount,...(data.state.actionCount||{})}};
     currentOutfit=data.outfit||'default';
     snackStock=data.snacks||[];
     return data.savedAt||null;
@@ -381,16 +428,19 @@ function doAction(type){
   const a=ACTIONS[type];
   if(a.energy&&a.energy<0&&state.energy+a.energy<0){addLog("エネルギーが足りない…休ませよう😮‍💨");return;}
   state.busy=true;setBtns(true);
+  // actionCountカウント
+  if(!state.actionCount)state.actionCount={};
+  state.actionCount[type]=(state.actionCount[type]||0)+1;
   addLog(a.logs[Math.floor(Math.random()*a.logs.length)]);
   if(a.energy) state.energy=cap(state.energy+a.energy);
-  if(a.str)    state.str=cap(state.str+a.str,0,999);
-  if(a.mag)    state.mag=cap(state.mag+a.mag,0,999);
+  if(a.str)    state.str=cap(state.str+applyPersonalityMult('str',a.str),0,999);
+  if(a.mag)    state.mag=cap(state.mag+applyPersonalityMult('mag',a.mag),0,999);
   if(a.spd)    state.spd=cap(state.spd+a.spd,0,999);
-  if(a.hp)     state.hp=cap(state.hp+a.hp,0,999);
-  if(a.luk)    state.luk=cap(state.luk+a.luk,0,999);
-  if(a.love)   state.love=cap(state.love+a.love);
+  if(a.hp)     state.hp=cap(state.hp+applyPersonalityMult('hp',a.hp),0,999);
+  if(a.luk)    state.luk=cap(state.luk+applyPersonalityMult('luk',a.luk),0,999);
+  if(a.love)   state.love=cap(state.love+applyPersonalityMult('love',a.love));
   if(a.hunger) state.hunger=cap(state.hunger+a.hunger);
-  if(a.clean)  state.clean=cap(state.clean+a.clean);
+  if(a.clean)  state.clean=cap(state.clean+applyPersonalityMult('bath',a.clean));
   state.exp+=Math.floor(Math.random()*6)+3;
   checkLevelUp();bounceChara();render();saveGame();
   setTimeout(()=>{state.busy=false;setBtns(false);tryNatsukiEvent();},700);
@@ -451,7 +501,10 @@ function goWalk(){
   if(ev.love)  state.love=cap(state.love+ev.love);
   if(ev.clean) state.clean=cap(state.clean+ev.clean);
   state.hunger=cap(state.hunger-8);
-  state.exp+=Math.floor(Math.random()*8)+5;
+  state.actionCount=state.actionCount||{};
+  state.actionCount['walk']=(state.actionCount['walk']||0)+1;
+  const walkExpBase=Math.floor(Math.random()*8)+5;
+  state.exp+=applyPersonalityMult('walkExp',walkExpBase);
   if(ev.snack) snackStock.push(ev.snack);
   if(ev.gii)   setTimeout(()=>showGii(),400);
   checkLevelUp();render();renderSnacks();saveGame();
@@ -514,6 +567,17 @@ function render(){
   document.getElementById('val-hunger').textContent=state.hunger;
   document.getElementById('bar-clean').style.width=state.clean+'%';
   document.getElementById('val-clean').textContent=state.clean;
+  // 性格表示
+  const p=getPersonality();
+  const pb=document.getElementById('personality-badge');
+  if(p){
+    pb.textContent=`${p.emoji} ${p.name}`;
+    pb.style.background=p.bg;pb.style.color=p.color;
+    pb.title=p.desc;
+  }else{
+    pb.textContent='まだわからない';
+    pb.style.background='#e8f5e3';pb.style.color='#3aada0';
+  }
   // 警告
   if(state.hunger<=10){addLog("おなかがすいた…ごはんをちょうだい🍙");state.love=cap(state.love-1);}
   if(state.clean<=15){addLog("よごれてる…お風呂に入れてあげよう🛁");}
