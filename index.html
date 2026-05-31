@@ -11,156 +11,112 @@
 :root{
   --bg:#e8f5e3;--bg2:#d4ecc8;--card:#ffffffcc;--border:#b5d9a0;
   --text:#2d4a1e;--text2:#5a7a48;--text3:#8aaa6a;
-  --green:#5cb85c;--teal:#3aada0;--coral:#e07a5f;--pink:#d4537e;
-  --amber:#c49a2a;--purple:#7f77dd;--navy:#3d5a80;
-  --accent:#3aada0;
+  --teal:#3aada0;--coral:#e07a5f;--pink:#d4537e;--amber:#c49a2a;--purple:#7f77dd;
 }
 body{
-  font-family:'Zen Maru Gothic',sans-serif;
-  background:var(--bg);
-  min-height:100vh;
-  display:flex;align-items:flex-start;justify-content:center;
+  font-family:'Zen Maru Gothic',sans-serif;background:var(--bg);
+  min-height:100vh;display:flex;align-items:flex-start;justify-content:center;
   padding:1rem;
-  background-image:
-    radial-gradient(circle at 10% 20%,rgba(90,200,150,0.15) 0%,transparent 50%),
-    radial-gradient(circle at 90% 80%,rgba(58,173,160,0.12) 0%,transparent 50%);
+  background-image:radial-gradient(circle at 10% 20%,rgba(90,200,150,0.15) 0%,transparent 50%),radial-gradient(circle at 90% 80%,rgba(58,173,160,0.12) 0%,transparent 50%);
 }
 #app{width:100%;max-width:400px;}
-
-/* ヘッダー */
-.game-title{
-  text-align:center;font-family:'Klee One',cursive;font-size:13px;
-  color:var(--text3);letter-spacing:0.15em;margin-bottom:6px;padding-top:4px;
-}
-
-/* キャラカード */
-.chara-card{
-  background:var(--card);border:1.5px solid var(--border);
-  border-radius:24px;padding:1.2rem 1rem 1rem;
-  margin-bottom:10px;text-align:center;
-  box-shadow:0 4px 20px rgba(90,160,80,0.12);
-  position:relative;overflow:hidden;
-}
-.chara-card::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 50% 0%,rgba(90,200,150,0.1),transparent 70%);
-  pointer-events:none;
-}
-
-/* キャラクター画像 */
-#chara-img-wrap{
-  width:180px;height:220px;margin:0 auto 4px;
-  display:flex;align-items:center;justify-content:center;
-}
-#chara-img{
-  max-width:100%;max-height:100%;
-  object-fit:contain;
-  transition:opacity 0.3s;
-}
-
-/* 着替えボタン */
-.outfit-row{
-  display:flex;justify-content:center;gap:6px;margin-bottom:10px;flex-wrap:wrap;
-}
-.outfit-btn{
-  font-size:11px;padding:4px 10px;border-radius:100px;
-  border:1.5px solid var(--border);background:#fff8;
-  color:var(--text2);cursor:pointer;transition:all 0.2s;font-family:inherit;
-}
+.game-title{text-align:center;font-family:'Klee One',cursive;font-size:13px;color:var(--text3);letter-spacing:0.15em;margin-bottom:6px;padding-top:4px;}
+.chara-card{background:var(--card);border:1.5px solid var(--border);border-radius:24px;padding:1.2rem 1rem 1rem;margin-bottom:10px;text-align:center;box-shadow:0 4px 20px rgba(90,160,80,0.12);position:relative;overflow:hidden;}
+.chara-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(90,200,150,0.1),transparent 70%);pointer-events:none;}
+#chara-img-wrap{width:180px;height:220px;margin:0 auto 4px;display:flex;align-items:center;justify-content:center;}
+#chara-img{max-width:100%;max-height:100%;object-fit:contain;transition:opacity 0.3s;}
+.outfit-row{display:flex;justify-content:center;gap:6px;margin-bottom:10px;flex-wrap:wrap;}
+.outfit-btn{font-size:11px;padding:4px 10px;border-radius:100px;border:1.5px solid var(--border);background:#fff8;color:var(--text2);cursor:pointer;transition:all 0.2s;font-family:inherit;}
 .outfit-btn:hover{background:var(--bg2);border-color:var(--teal);}
 .outfit-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
-
 .chara-name{font-size:20px;font-weight:700;color:var(--text);font-family:'Klee One',cursive;}
 .chara-level{font-size:12px;color:var(--text3);margin-top:1px;}
-.mood-badge{
-  display:inline-block;font-size:12px;padding:3px 14px;
-  border-radius:100px;margin-top:6px;font-weight:500;transition:all 0.3s;
-}
+.mood-badge{display:inline-block;font-size:12px;padding:3px 14px;border-radius:100px;margin-top:6px;font-weight:500;transition:all 0.3s;}
 .exp-row{display:flex;align-items:center;gap:6px;margin-top:10px;}
-.exp-lbl{font-size:11px;color:var(--text3);white-space:nowrap;}
-.exp-num{font-size:11px;color:var(--text3);white-space:nowrap;}
-
-/* ステータスカード */
-.card{
-  background:var(--card);border:1.5px solid var(--border);
-  border-radius:18px;padding:1rem 1.1rem;margin-bottom:10px;
-  box-shadow:0 2px 10px rgba(90,160,80,0.08);
-}
-.section-title{
-  font-size:11px;font-weight:700;color:var(--text3);
-  letter-spacing:0.1em;margin-bottom:9px;
-}
+.exp-lbl,.exp-num{font-size:11px;color:var(--text3);white-space:nowrap;}
+.card{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:1rem 1.1rem;margin-bottom:10px;box-shadow:0 2px 10px rgba(90,160,80,0.08);}
+.section-title{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.1em;margin-bottom:9px;}
 .stat-row{display:flex;align-items:center;gap:6px;margin-bottom:8px;}
-.stat-label{font-size:12px;color:var(--text2);width:74px;flex-shrink:0;line-height:1.2;}
+.stat-label{font-size:12px;color:var(--text2);width:80px;flex-shrink:0;line-height:1.2;}
 .bar-bg{flex:1;height:7px;border-radius:4px;background:rgba(0,0,0,0.07);overflow:hidden;}
 .bar-fill{height:100%;border-radius:4px;transition:width 0.5s cubic-bezier(.34,1.56,.64,1);}
 .stat-val{font-size:12px;font-weight:700;width:32px;text-align:right;color:var(--text);}
-
-/* なつき・おなかは大きめバー */
 .special-stat .bar-bg{height:10px;border-radius:5px;}
 .special-stat .stat-label{font-size:13px;}
 .special-stat .stat-val{font-size:13px;}
-
-/* ボタン */
 .btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-button.action-btn{
-  cursor:pointer;font-family:'Zen Maru Gothic',sans-serif;font-size:13px;font-weight:500;
-  padding:11px 8px;border-radius:14px;border:1.5px solid var(--border);
-  background:#fff9;color:var(--text);transition:all 0.15s;
-  display:flex;align-items:center;justify-content:center;gap:5px;
-}
-button.action-btn:hover:not(:disabled){
-  background:var(--bg2);border-color:var(--teal);transform:translateY(-1px);
-  box-shadow:0 3px 10px rgba(58,173,160,0.2);
-}
+button.action-btn{cursor:pointer;font-family:'Zen Maru Gothic',sans-serif;font-size:13px;font-weight:500;padding:11px 8px;border-radius:14px;border:1.5px solid var(--border);background:#fff9;color:var(--text);transition:all 0.15s;display:flex;align-items:center;justify-content:center;gap:5px;}
+button.action-btn:hover:not(:disabled){background:var(--bg2);border-color:var(--teal);transform:translateY(-1px);box-shadow:0 3px 10px rgba(58,173,160,0.2);}
 button.action-btn:active:not(:disabled){transform:scale(0.97);}
 button.action-btn:disabled{opacity:0.35;cursor:default;}
-
+button.action-btn.highlight{border-color:var(--teal);background:rgba(58,173,160,0.1);}
 .auto-wrap{display:flex;align-items:center;gap:7px;margin-top:10px;}
 .auto-wrap input[type=checkbox]{accent-color:var(--teal);width:14px;height:14px;cursor:pointer;}
 .auto-wrap label{font-size:12px;color:var(--text3);cursor:pointer;}
-
-/* ログ */
 .log{font-size:13px;color:var(--text2);line-height:1.7;min-height:42px;}
 .log-flash{animation:logfade 0.3s ease;}
 @keyframes logfade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
 
-/* レベルアップ */
-#lvup-overlay{
-  position:fixed;inset:0;display:flex;align-items:center;
-  justify-content:center;pointer-events:none;z-index:99;
+/* おやつストック */
+.snack-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+.snack-chip{font-size:13px;padding:4px 10px;border-radius:100px;border:1.5px solid var(--border);background:#fff9;cursor:pointer;transition:all 0.2s;font-family:inherit;color:var(--text);}
+.snack-chip:hover{background:var(--bg2);}
+.snack-empty{font-size:12px;color:var(--text3);}
+
+/* 散歩モーダル */
+#walk-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:50;align-items:center;justify-content:center;}
+#walk-modal.show{display:flex;}
+.walk-box{background:#fff;border-radius:24px;padding:1.5rem;max-width:300px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.15);}
+.walk-title{font-size:15px;font-weight:700;color:var(--text);font-family:'Klee One',cursive;margin-bottom:8px;}
+.walk-scene{font-size:40px;margin:10px 0;}
+.walk-desc{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:12px;}
+.walk-result{font-size:12px;color:var(--teal);font-weight:700;margin-bottom:14px;}
+.walk-close{font-size:13px;padding:8px 24px;border-radius:100px;border:1.5px solid var(--border);background:var(--teal);color:#fff;cursor:pointer;font-family:inherit;}
+
+/* 懐きイベントモーダル */
+#natsuki-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:50;align-items:center;justify-content:center;}
+#natsuki-modal.show{display:flex;}
+.natsuki-box{background:#fff;border-radius:24px;padding:1.5rem 1.5rem 1.2rem;max-width:300px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(90,160,80,0.2);border:2px solid #b5d9a0;}
+.natsuki-icon{font-size:52px;margin-bottom:8px;animation:fuwa 2s ease-in-out infinite;}
+@keyframes fuwa{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.natsuki-title{font-size:13px;font-weight:700;color:var(--text3);letter-spacing:0.1em;margin-bottom:10px;}
+.natsuki-text{font-size:14px;color:var(--text);line-height:1.9;margin-bottom:14px;font-family:'Klee One',cursive;}
+.natsuki-close{font-size:13px;padding:8px 24px;border-radius:100px;border:1.5px solid var(--border);background:var(--teal);color:#fff;cursor:pointer;font-family:inherit;}
+
+/* ギーーーッ演出 */
+#gii-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:99;}
+.gii-msg{
+  font-size:40px;font-weight:700;color:#2baa6a;
+  font-family:'Zen Maru Gothic',sans-serif;
+  display:none;
+  text-shadow:0 0 16px rgba(43,170,106,0.3);
+  border:3px solid #2baa6a;
+  background:rgba(220,255,235,0.97);
+  border-radius:100px;
+  padding:12px 28px;
 }
-.lvup-msg{
-  font-size:28px;font-weight:700;color:#2d8a60;
-  text-shadow:0 0 16px rgba(58,173,160,0.5);
-  animation:lvup 1.3s ease forwards;display:none;
-  font-family:'Klee One',cursive;
-}
-@keyframes lvup{
-  0%{opacity:0;transform:scale(0.6) translateY(20px)}
-  35%{opacity:1;transform:scale(1.1) translateY(0)}
-  70%{opacity:1;transform:scale(1)}
-  100%{opacity:0;transform:scale(0.9) translateY(-20px)}
+.gii-msg.show{display:block;animation:gii 1.6s ease forwards;}
+@keyframes gii{
+  0%  {opacity:0;transform:scale(0.4)}
+  15% {opacity:1;transform:scale(1.15)}
+  25% {transform:scale(0.95) rotate(-3deg)}
+  35% {transform:scale(1.08) rotate(3deg)}
+  45% {transform:scale(0.97) rotate(-2deg)}
+  55% {transform:scale(1.04) rotate(1deg)}
+  65% {transform:scale(1) rotate(0)}
+  80% {opacity:1;transform:scale(1)}
+  100%{opacity:0;transform:scale(0.9) translateY(-16px)}
 }
 
-/* キャラアニメ */
+/* レベルアップ */
+#lvup-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:99;}
+.lvup-msg{font-size:28px;font-weight:700;color:#2d8a60;text-shadow:0 0 16px rgba(58,173,160,0.5);animation:lvup 1.3s ease forwards;display:none;font-family:'Klee One',cursive;}
+@keyframes lvup{0%{opacity:0;transform:scale(0.6) translateY(20px)}35%{opacity:1;transform:scale(1.1) translateY(0)}70%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(0.9) translateY(-20px)}}
 .bounce{animation:bounce 0.4s ease;}
-@keyframes bounce{
-  0%,100%{transform:scale(1)}
-  40%{transform:scale(1.1) rotate(-4deg)}
-  70%{transform:scale(0.96) rotate(2deg)}
-}
-/* セーブ表示 */
-.save-row{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:8px;
-}
+@keyframes bounce{0%,100%{transform:scale(1)}40%{transform:scale(1.1) rotate(-4deg)}70%{transform:scale(0.96) rotate(2deg)}}
+.save-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
 .save-info{font-size:11px;color:var(--text3);}
-.reset-btn{
-  font-size:11px;padding:3px 10px;border-radius:100px;
-  border:1px solid #e07a5f55;background:transparent;
-  color:#e07a5f;cursor:pointer;font-family:inherit;transition:all 0.2s;
-}
+.reset-btn{font-size:11px;padding:3px 10px;border-radius:100px;border:1px solid #e07a5f55;background:transparent;color:#e07a5f;cursor:pointer;font-family:inherit;transition:all 0.2s;}
 .reset-btn:hover{background:#e07a5f18;}
 </style>
 </head>
@@ -174,18 +130,15 @@ button.action-btn:disabled{opacity:0.35;cursor:default;}
 
   <div class="chara-card">
     <div id="chara-img-wrap"><img id="chara-img" src="egg_default.png" alt="ムスカムスカ"></div>
-    <!-- 着替えボタン -->
     <div class="outfit-row">
       <button class="outfit-btn active" onclick="setOutfit('default')" id="outfit-default">🖤 デフォ</button>
       <button class="outfit-btn" onclick="setOutfit('casual')" id="outfit-casual">💚 カジュアル</button>
       <button class="outfit-btn" onclick="setOutfit('fancy')" id="outfit-fancy">💜 おしゃれ</button>
       <button class="outfit-btn" onclick="setOutfit('sleep')" id="outfit-sleep">🌙 パジャマ</button>
     </div>
-
     <div class="chara-name">ムスカムスカ</div>
     <div class="chara-level" id="chara-level">Lv.1 ・ たまご期</div>
     <div class="mood-badge" id="mood-badge" style="background:#e8f5e3;color:#5a7a48;">😐 ふつう</div>
-
     <div class="exp-row">
       <span class="exp-lbl">EXP</span>
       <div class="bar-bg" style="flex:1"><div class="bar-fill" id="exp-bar" style="width:0%;background:#3aada0;"></div></div>
@@ -193,7 +146,7 @@ button.action-btn:disabled{opacity:0.35;cursor:default;}
     </div>
   </div>
 
-  <!-- なつき度・おなか -->
+  <!-- きもち -->
   <div class="card">
     <div class="section-title">きもち</div>
     <div class="stat-row special-stat">
@@ -206,39 +159,24 @@ button.action-btn:disabled{opacity:0.35;cursor:default;}
       <div class="bar-bg"><div class="bar-fill" id="bar-hunger" style="width:70%;background:#c49a2a;"></div></div>
       <span class="stat-val" id="val-hunger">70</span>
     </div>
+    <div class="stat-row special-stat">
+      <span class="stat-label">🛁 清潔度</span>
+      <div class="bar-bg"><div class="bar-fill" id="bar-clean" style="width:80%;background:#3aada0;"></div></div>
+      <span class="stat-val" id="val-clean">80</span>
+    </div>
   </div>
 
   <!-- ステータス -->
   <div class="card">
     <div class="section-title">ステータス</div>
-    <div class="stat-row">
-      <span class="stat-label">💪 ちから</span>
-      <div class="bar-bg"><div class="bar-fill" id="bar-str" style="width:10%;background:#e07a5f;"></div></div>
-      <span class="stat-val" id="val-str">10</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-label">✨ まほう</span>
-      <div class="bar-bg"><div class="bar-fill" id="bar-mag" style="width:10%;background:#7f77dd;"></div></div>
-      <span class="stat-val" id="val-mag">10</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-label">💨 すばやさ</span>
-      <div class="bar-bg"><div class="bar-fill" id="bar-spd" style="width:10%;background:#3aada0;"></div></div>
-      <span class="stat-val" id="val-spd">10</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-label">❤️ たいりょく</span>
-      <div class="bar-bg"><div class="bar-fill" id="bar-hp" style="width:10%;background:#d4537e;"></div></div>
-      <span class="stat-val" id="val-hp">10</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-label">🍀 こうん</span>
-      <div class="bar-bg"><div class="bar-fill" id="bar-luk" style="width:10%;background:#c49a2a;"></div></div>
-      <span class="stat-val" id="val-luk">10</span>
-    </div>
+    <div class="stat-row"><span class="stat-label">💪 ちから</span><div class="bar-bg"><div class="bar-fill" id="bar-str" style="width:10%;background:#e07a5f;"></div></div><span class="stat-val" id="val-str">10</span></div>
+    <div class="stat-row"><span class="stat-label">✨ まほう</span><div class="bar-bg"><div class="bar-fill" id="bar-mag" style="width:10%;background:#7f77dd;"></div></div><span class="stat-val" id="val-mag">10</span></div>
+    <div class="stat-row"><span class="stat-label">💨 すばやさ</span><div class="bar-bg"><div class="bar-fill" id="bar-spd" style="width:10%;background:#3aada0;"></div></div><span class="stat-val" id="val-spd">10</span></div>
+    <div class="stat-row"><span class="stat-label">❤️ たいりょく</span><div class="bar-bg"><div class="bar-fill" id="bar-hp" style="width:10%;background:#d4537e;"></div></div><span class="stat-val" id="val-hp">10</span></div>
+    <div class="stat-row"><span class="stat-label">🍀 こうん</span><div class="bar-bg"><div class="bar-fill" id="bar-luk" style="width:10%;background:#c49a2a;"></div></div><span class="stat-val" id="val-luk">10</span></div>
   </div>
 
-  <!-- 育てるボタン -->
+  <!-- 育てる -->
   <div class="card">
     <div class="section-title">育てる</div>
     <div class="btn-grid">
@@ -247,12 +185,20 @@ button.action-btn:disabled{opacity:0.35;cursor:default;}
       <button class="action-btn" id="btn-play"  onclick="doAction('play')">🎉 遊ばせる</button>
       <button class="action-btn" id="btn-rest"  onclick="doAction('rest')">🌙 休ませる</button>
       <button class="action-btn" id="btn-feed"  onclick="doAction('feed')">🍙 ごはん</button>
+      <button class="action-btn" id="btn-bath"  onclick="doAction('bath')">🛁 お風呂</button>
       <button class="action-btn" id="btn-pet"   onclick="doAction('pet')">🫶 なでる</button>
+      <button class="action-btn" id="btn-walk"  onclick="goWalk()" style="grid-column:span 2">🚶 お散歩に行く</button>
     </div>
     <div class="auto-wrap">
       <input type="checkbox" id="auto-cb" onchange="toggleAuto()">
       <label for="auto-cb">オート育成（3秒ごとに自動行動）</label>
     </div>
+  </div>
+
+  <!-- おやつ -->
+  <div class="card">
+    <div class="section-title">おやつストック</div>
+    <div class="snack-grid" id="snack-grid"><span class="snack-empty">まだ何もない…お散歩で拾ってこよう</span></div>
   </div>
 
   <!-- ログ -->
@@ -262,46 +208,114 @@ button.action-btn:disabled{opacity:0.35;cursor:default;}
   </div>
 </div>
 
+
+<!-- 懐きイベントモーダル -->
+<div id="natsuki-modal">
+  <div class="natsuki-box">
+    <div class="natsuki-title">💗 特別なできごと</div>
+    <img id="natsuki-img" src="" alt="" style="width:100%;max-width:260px;border-radius:12px;margin-bottom:8px;display:none;">
+    <div class="natsuki-icon" id="natsuki-icon" style="display:none;">🪰</div>
+    <div class="natsuki-text" id="natsuki-text"></div>
+    <button class="natsuki-close" onclick="closeNatsuki()">よかったね…</button>
+  </div>
+</div>
+
+<!-- 散歩モーダル -->
+<div id="walk-modal">
+  <div class="walk-box">
+    <div class="walk-title" id="walk-title">🚶 お散歩中…</div>
+    <div class="walk-scene" id="walk-scene">🌳</div>
+    <div class="walk-desc" id="walk-desc"></div>
+    <div class="walk-result" id="walk-result"></div>
+    <button class="walk-close" onclick="closeWalk()">もどる</button>
+  </div>
+</div>
+
+<div id="gii-overlay"><div class="gii-msg" id="gii-msg">ギーーーーッ！！</div></div>
 <div id="lvup-overlay"><div class="lvup-msg" id="lvup-msg"></div></div>
 
 <script>
 const STAGES=[
-  {lv:1, name:"たまご期", img:"egg"},
-  {lv:3, name:"子ども期", img:"child"},
-  {lv:6, name:"少年期",   img:"child"},
-  {lv:10,name:"青年期",   img:"adult"},
-  {lv:15,name:"大人期",   img:"adult"},
-  {lv:20,name:"覚醒期",   img:"legend"},
-  {lv:30,name:"伝説期",   img:"legend"},
+  {lv:1, name:"たまご期",img:"egg"},
+  {lv:3, name:"子ども期",img:"child"},
+  {lv:6, name:"少年期",  img:"child"},
+  {lv:10,name:"青年期",  img:"adult"},
+  {lv:15,name:"大人期",  img:"adult"},
+  {lv:20,name:"覚醒期",  img:"legend"},
+  {lv:30,name:"伝説期",  img:"legend"},
 ];
 const EXP_PER_LV=lv=>Math.floor(30*Math.pow(1.35,lv-1));
 const MOODS=[
   {min:80,text:"😄 大好き！",bg:"#d4f0e0",col:"#2d8a60"},
   {min:60,text:"😊 なかよし",bg:"#e3f5d4",col:"#4a7a30"},
-  {min:35,text:"😐 ふつう",bg:"#e8f5e3",col:"#5a7a48"},
+  {min:35,text:"😐 ふつう",  bg:"#e8f5e3",col:"#5a7a48"},
   {min:10,text:"😒 そっけない",bg:"#f5ead4",col:"#8a6a20"},
-  {min:0, text:"😭 きらい…",bg:"#f5d4d4",col:"#8a3030"},
+  {min:0, text:"😭 きらい…", bg:"#f5d4d4",col:"#8a3030"},
 ];
-const ACTIONS={
-  train:{energy:-20,str:5,spd:2,hunger:-10,          logs:["汗だくで特訓した！💪","壁を100回殴った…","稽古で一皮むけた！"]},
-  study:{energy:-15,mag:5,luk:2,hunger:-8,           logs:["魔法書を読みふけった✨","難しい呪文を解読した","図書館に引きこもった…"]},
-  play: {energy:-10,spd:3,luk:3,love:+8,hunger:-5,  logs:["野原を飛び回った🍀","友達と遊んで大笑い！","秘密基地で遊んだ"]},
-  rest: {energy:+40,hp:5,hunger:-5,                  logs:["ぐっすり眠った💤","ぼーっとして回復した","ゆっくり休んだ"]},
-  feed: {hunger:+40,love:+5,energy:+5,               logs:["おいしそうに食べた🍙","もぐもぐ…おいしい！","ごはんでご機嫌に😊"]},
-  pet:  {love:+15,energy:-2,                         logs:["うれしそうにしてる💗","なでられてにこにこ🌸","すこし照れてる…かわいい"]},
+
+// おやつ定義
+const SNACKS={
+  banana: {label:"🍌 バナナの皮", hunger:25, love:3,  clean:-5,  msg:"おいしそうに食べた！大好物だ🍌"},
+  dango:  {label:"🍡 みたらし団子",hunger:20, love:12, clean:0,   msg:"あまい…にんげんっぽい！うれしい🍡"},
+  cake:   {label:"🧁 ケーキ",      hunger:15, love:18, clean:-3,  msg:"あまい…（よくわからない）でもうれしい🧁"},
+  kusaya: {label:"🐟 くさやの干物",hunger:35, love:5,  clean:-10, msg:"さいこうにおいしい…🐟"},
+  milk:   {label:"🥛 ぎゅうにゅう",hunger:15, love:8,  clean:0,   msg:"にんげんのんでた。のんでみた🥛"},
+  vitamin:{label:"💊 ビタミン剤",   hunger:5,  love:0,  clean:0,   gii:true, msg:"にがい…"},
 };
-const OUTFITS={
-  default:{shirtColor:"#2d2d2d",sleeveColor:"#f0ebe0",pantsColor:"#b8966e",textVis:true},
-  casual: {shirtColor:"#4ecdc4",sleeveColor:"#fff8e1",pantsColor:"#5d9e6b",textVis:false,shirtText:"casual✦"},
-  fancy:  {shirtColor:"#7f77dd",sleeveColor:"#f5d0e8",pantsColor:"#4a3580",textVis:false,shirtText:"✦fancy✦"},
-  sleep:  {shirtColor:"#b8d4f0",sleeveColor:"#d8eaf8",pantsColor:"#8aaad0",textVis:false,shirtText:"zzz…"},
+
+// お散歩イベント定義
+const WALK_EVENTS=[
+  {scene:"🌳",place:"公園",
+   events:[
+     {desc:"人間の子どもと目が合った…！",result:"なつき度UP！",love:12,clean:-5,snack:null},
+     {desc:"バナナの皮が落ちていた。",result:"🍌 バナナの皮をひろった！",love:3,clean:-5,snack:"banana"},
+     {desc:"人間がベンチで寝ていた。じっと見た。",result:"なつき度すこしUP",love:5,clean:-5,snack:null},
+   ]},
+  {scene:"🗑️",place:"ゴミ捨て場",
+   events:[
+     {desc:"くさやの干物があった。ラッキー！",result:"🐟 くさやの干物をひろった！",love:0,clean:-8,snack:"kusaya"},
+     {desc:"おいしそうなにおいがした。さがしたけどなかった。",result:"なにもなかった",love:0,clean:-8,snack:null},
+     {desc:"みたらし団子が落ちていた。",result:"🍡 みたらし団子をひろった！",love:0,clean:-8,snack:"dango"},
+   ]},
+  {scene:"🏪",place:"コンビニのまえ",
+   events:[
+     {desc:"ガラスに自分が映っていた。きれいだった。",result:"きぶんがよくなった",love:5,clean:0,snack:null},
+     {desc:"ケーキが半額になってて人間が買っていた。",result:"🧁 落ちてたかけらをひろった！",love:3,clean:0,snack:"cake"},
+     {desc:"牛乳パックが落ちていた。",result:"🥛 ぎゅうにゅうをひろった！",love:0,clean:0,snack:"milk"},
+   ]},
+  {scene:"🚌",place:"バス停",
+   events:[
+     {desc:"ハエ叩きを持ったおじさんがいた。",result:"こわかった…",love:-5,clean:0,snack:null,gii:true},
+     {desc:"人間がたくさん並んでいた。じっと見た。",result:"なつき度UP！",love:8,clean:-3,snack:null},
+   ]},
+  {scene:"🌸",place:"花畑",
+   events:[
+     {desc:"花のにおいがした。よくわからなかった。",result:"気持ちよかった",love:5,clean:0,snack:null},
+     {desc:"人間がピクニックしてた。うれしかった。",result:"なつき度UP！",love:10,clean:-3,snack:null},
+     {desc:"ビタミン剤が落ちていた。",result:"💊 ビタミン剤をひろった！",love:0,clean:0,snack:"vitamin"},
+   ]},
+  {scene:"🌧️",place:"雨の道",
+   events:[
+     {desc:"ぬれた。",result:"清潔度がさがった",love:0,clean:-20,snack:null},
+     {desc:"ハエ叩きを持った人間が傘さして歩いてた。",result:"こわかった…",love:-8,clean:-10,snack:null,gii:true},
+   ]},
+];
+
+const ACTIONS={
+  train:{energy:-20,str:5,spd:2,hunger:-10,clean:-8, logs:["汗だくで特訓した！💪","壁を100回殴った…","稽古で一皮むけた！"]},
+  study:{energy:-15,mag:5,luk:2,hunger:-8, clean:-3, logs:["魔法書を読みふけった✨","難しい呪文を解読した","図書館に引きこもった…"]},
+  play: {energy:-10,spd:3,luk:3,love:8,hunger:-5,clean:-5, logs:["野原を飛び回った🍀","友達と遊んで大笑い！","秘密基地で遊んだ"]},
+  rest: {energy:40, hp:5,hunger:-5,clean:-2, logs:["ぐっすり眠った💤","ぼーっとして回復した","ゆっくり休んだ"]},
+  feed: {hunger:40,love:5,energy:5, logs:["おいしそうに食べた🍙","もぐもぐ…おいしい！","ごはんでご機嫌に😊"]},
+  bath: {energy:-5, clean:40,love:8, logs:["ぴかぴか！これで人間に近づける…！🛁","きれいになった🫧","しゅわしゅわして気持ちよかった"]},
+  pet:  {love:15,energy:-2, logs:["（うれしそうにしてる）💗","（なでられてにこにこしてる）🌸","（すこし照れてる…かわいい）"]},
 };
 
 const SAVE_KEY='musukamosuka_save';
-const DEFAULT_STATE={lv:1,exp:0,str:10,mag:10,spd:10,hp:10,luk:10,energy:70,mood:50,love:30,hunger:70,busy:false};
+const DEFAULT_STATE={lv:1,exp:0,str:10,mag:10,spd:10,hp:10,luk:10,energy:70,love:30,hunger:70,clean:80,busy:false};
 
 function saveGame(){
-  const data={state:{...state,busy:false},outfit:currentOutfit,savedAt:Date.now()};
+  const data={state:{...state,busy:false},outfit:currentOutfit,snacks:[...snackStock],savedAt:Date.now()};
   localStorage.setItem(SAVE_KEY,JSON.stringify(data));
   updateSaveInfo();
 }
@@ -312,6 +326,7 @@ function loadGame(){
     const data=JSON.parse(raw);
     state={...DEFAULT_STATE,...data.state,busy:false};
     currentOutfit=data.outfit||'default';
+    snackStock=data.snacks||[];
     return data.savedAt||null;
   }catch(e){return false;}
 }
@@ -320,8 +335,10 @@ function resetGame(){
   localStorage.removeItem(SAVE_KEY);
   state={...DEFAULT_STATE};
   currentOutfit='default';
+  snackStock=[];
   setOutfit('default');
   updateSaveInfo();
+  renderSnacks();
   render();
   addLog('ムスカムスカが誕生した。大切に育てよう！');
 }
@@ -332,31 +349,25 @@ function updateSaveInfo(){
   try{
     const d=JSON.parse(raw);
     const dt=new Date(d.savedAt);
-    const str=`${dt.getMonth()+1}/${dt.getDate()} ${dt.getHours()}:${String(dt.getMinutes()).padStart(2,'0')}`;
-    el.textContent=`💾 ${str} 自動セーブ済み`;
+    el.textContent=`💾 ${dt.getMonth()+1}/${dt.getDate()} ${dt.getHours()}:${String(dt.getMinutes()).padStart(2,'0')} 自動セーブ済み`;
   }catch{el.textContent='💾 セーブあり';}
 }
 
 let state={...DEFAULT_STATE};
 let autoTimer=null;
 let currentOutfit='default';
+let snackStock=[];
 
 function getStage(){let s=STAGES[0];for(const st of STAGES){if(state.lv>=st.lv)s=st;}return s;}
-function getMood(){
-  const idx=Math.max(0,Math.min(99,Math.round(state.love)));
-  for(const m of MOODS){if(idx>=m.min)return m;}return MOODS[MOODS.length-1];
-}
+function getMood(){for(const m of MOODS){if(state.love>=m.min)return m;}return MOODS[MOODS.length-1];}
 function cap(v,mn=0,mx=100){return Math.min(mx,Math.max(mn,v));}
 
 function setOutfit(name){
   currentOutfit=name;
   updateCharaImg();
-  document.querySelectorAll('.outfit-btn').forEach(b=>{
-    b.classList.toggle('active',b.id==='outfit-'+name);
-  });
+  document.querySelectorAll('.outfit-btn').forEach(b=>{b.classList.toggle('active',b.id==='outfit-'+name);});
   bounceChara();
 }
-
 function updateCharaImg(){
   const stage=getStage();
   const src=`${stage.img}_${currentOutfit}.png`;
@@ -368,9 +379,7 @@ function updateCharaImg(){
 function doAction(type){
   if(state.busy)return;
   const a=ACTIONS[type];
-  if(a.energy&&a.energy<0&&state.energy+a.energy<0){
-    addLog("エネルギーが足りない…休ませよう。😮‍💨");return;
-  }
+  if(a.energy&&a.energy<0&&state.energy+a.energy<0){addLog("エネルギーが足りない…休ませよう😮‍💨");return;}
   state.busy=true;setBtns(true);
   addLog(a.logs[Math.floor(Math.random()*a.logs.length)]);
   if(a.energy) state.energy=cap(state.energy+a.energy);
@@ -381,17 +390,89 @@ function doAction(type){
   if(a.luk)    state.luk=cap(state.luk+a.luk,0,999);
   if(a.love)   state.love=cap(state.love+a.love);
   if(a.hunger) state.hunger=cap(state.hunger+a.hunger);
+  if(a.clean)  state.clean=cap(state.clean+a.clean);
   state.exp+=Math.floor(Math.random()*6)+3;
   checkLevelUp();bounceChara();render();saveGame();
-  setTimeout(()=>{state.busy=false;setBtns(false);},600);
+  setTimeout(()=>{state.busy=false;setBtns(false);tryNatsukiEvent();},700);
+}
+
+function eatSnack(key){
+  if(state.busy)return;
+  const s=SNACKS[key];
+  if(!s)return;
+  const idx=snackStock.indexOf(key);
+  if(idx===-1)return;
+  snackStock.splice(idx,1);
+  addLog(s.msg);
+  state.hunger=cap(state.hunger+s.hunger);
+  state.love=cap(state.love+s.love);
+  state.clean=cap(state.clean+s.clean);
+  if(s.gii)showGii();
+  else bounceChara();
+  render();renderSnacks();saveGame();
+}
+
+function renderSnacks(){
+  const grid=document.getElementById('snack-grid');
+  if(snackStock.length===0){
+    grid.innerHTML='<span class="snack-empty">まだ何もない…お散歩で拾ってこよう</span>';
+    return;
+  }
+  // カウント集計
+  const counts={};
+  snackStock.forEach(k=>{counts[k]=(counts[k]||0)+1;});
+  grid.innerHTML='';
+  for(const[key,cnt]of Object.entries(counts)){
+    const s=SNACKS[key];
+    if(!s)continue;
+    const btn=document.createElement('button');
+    btn.className='snack-chip';
+    btn.textContent=`${s.label}×${cnt}`;
+    btn.onclick=()=>eatSnack(key);
+    grid.appendChild(btn);
+  }
+}
+
+// お散歩
+function goWalk(){
+  if(state.busy)return;
+  if(state.clean<20){addLog("よごれすぎてて外に出られない…お風呂に入ろう🛁");return;}
+  state.busy=true;setBtns(true);
+  // ランダムイベント抽選
+  const place=WALK_EVENTS[Math.floor(Math.random()*WALK_EVENTS.length)];
+  const ev=place.events[Math.floor(Math.random()*place.events.length)];
+  // モーダル表示
+  document.getElementById('walk-title').textContent=`🚶 ${place.place}にいった`;
+  document.getElementById('walk-scene').textContent=place.scene;
+  document.getElementById('walk-desc').textContent=ev.desc;
+  document.getElementById('walk-result').textContent=ev.result;
+  document.getElementById('walk-modal').classList.add('show');
+  // ステート反映
+  if(ev.love)  state.love=cap(state.love+ev.love);
+  if(ev.clean) state.clean=cap(state.clean+ev.clean);
+  state.hunger=cap(state.hunger-8);
+  state.exp+=Math.floor(Math.random()*8)+5;
+  if(ev.snack) snackStock.push(ev.snack);
+  if(ev.gii)   setTimeout(()=>showGii(),400);
+  checkLevelUp();render();renderSnacks();saveGame();
+}
+function closeWalk(){
+  document.getElementById('walk-modal').classList.remove('show');
+  bounceChara();
+  state.busy=false;setBtns(false);
+}
+
+function showGii(){
+  const el=document.getElementById('gii-msg');
+  el.classList.remove('show');
+  void el.offsetWidth;
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),1400);
 }
 
 function checkLevelUp(){
   let needed=EXP_PER_LV(state.lv);
-  while(state.exp>=needed){
-    state.exp-=needed;state.lv++;
-    showLvUp(state.lv);needed=EXP_PER_LV(state.lv);
-  }
+  while(state.exp>=needed){state.exp-=needed;state.lv++;showLvUp(state.lv);needed=EXP_PER_LV(state.lv);}
 }
 function showLvUp(lv){
   const el=document.getElementById('lvup-msg');
@@ -409,8 +490,8 @@ function addLog(msg){
   el.classList.remove('log-flash');void el.offsetWidth;el.classList.add('log-flash');
 }
 function setBtns(d){
-  ['btn-train','btn-study','btn-play','btn-rest','btn-feed','btn-pet']
-    .forEach(id=>{document.getElementById(id).disabled=d;});
+  ['btn-train','btn-study','btn-play','btn-rest','btn-feed','btn-bath','btn-pet','btn-walk']
+    .forEach(id=>{ const b=document.getElementById(id); if(b)b.disabled=d; });
 }
 
 function render(){
@@ -420,8 +501,7 @@ function render(){
   updateCharaImg();
   const mb=document.getElementById('mood-badge');
   mb.textContent=mood.text;mb.style.background=mood.bg;mb.style.color=mood.col;
-  const expPct=Math.min(100,Math.round(state.exp/needed*100));
-  document.getElementById('exp-bar').style.width=expPct+'%';
+  document.getElementById('exp-bar').style.width=Math.min(100,Math.round(state.exp/needed*100))+'%';
   document.getElementById('exp-num').textContent=`${state.exp}/${needed}`;
   const stats={str:'str',mag:'mag',spd:'spd',hp:'hp',luk:'luk'};
   for(const[k,id]of Object.entries(stats)){
@@ -432,37 +512,77 @@ function render(){
   document.getElementById('val-love').textContent=state.love;
   document.getElementById('bar-hunger').style.width=state.hunger+'%';
   document.getElementById('val-hunger').textContent=state.hunger;
-  // おなかが0になったら警告
-  if(state.hunger<=10&&state.hunger>0){
-    addLog("おなかがすいた…ごはんをちょうだい🍙");
-    state.love=cap(state.love-1);
-  }
+  document.getElementById('bar-clean').style.width=state.clean+'%';
+  document.getElementById('val-clean').textContent=state.clean;
+  // 警告
+  if(state.hunger<=10){addLog("おなかがすいた…ごはんをちょうだい🍙");state.love=cap(state.love-1);}
+  if(state.clean<=15){addLog("よごれてる…お風呂に入れてあげよう🛁");}
+  // お風呂ボタンを清潔度低いとき強調
+  const bathBtn=document.getElementById('btn-bath');
+  if(bathBtn)bathBtn.classList.toggle('highlight',state.clean<30);
 }
 
 function toggleAuto(){
   const cb=document.getElementById('auto-cb');
   if(cb.checked){
-    const acts=['train','study','play','rest','feed','pet'];
+    const acts=['train','study','play','rest','bath','pet'];
     autoTimer=setInterval(()=>{
-      // おなかが少ないときはごはん優先
-      if(state.hunger<25)doAction('feed');
+      if(state.hunger<25)doAction('rest');
+      else if(state.clean<30)doAction('bath');
       else doAction(acts[Math.floor(Math.random()*acts.length)]);
     },3000);
-  } else {
-    clearInterval(autoTimer);autoTimer=null;
-  }
+  }else{clearInterval(autoTimer);autoTimer=null;}
 }
 
-// 起動時ロード
+
+// 懐きイベント
+const NATSUKI_EVENTS=[
+  {key:"sleep", icon:"🪰💤", text:"手によじ登ってきた！\n羽をぷるぷるさせている……\nそのまま寝ちゃった。"},
+  {key:"stare", icon:"🪰👀", text:"じっとこちらを見ている。\n目が合った。\nそらさない。"},
+  {key:"sniff", icon:"🪰👃", text:"においをかいでいる。\nしばらくして、\n気に入ったらしい。"},
+  {key:"sleeve",icon:"🪰🧥", text:"服の袖にもぐりこんできた。\nあったかいらしく、\nもう出てこない。"},
+  {key:"shoulder",icon:"🪰🫱", text:"肩に乗ってきた。\n動いたら落ちそうで、\nしばらく動けなかった。"},
+  {key:"wings", icon:"🪰✨", text:"羽をぷるぷるさせながら\n近づいてきた。\nなにか伝えたいらしい。"},
+];
+let lastNatsukiCheck=0;
+
+function tryNatsukiEvent(){
+  if(state.love<80)return;
+  if(state.lv<3)return;
+  const now=Date.now();
+  if(now-lastNatsukiCheck<8000)return;
+  lastNatsukiCheck=now;
+  if(Math.random()>0.25)return;
+  const ev=NATSUKI_EVENTS[Math.floor(Math.random()*NATSUKI_EVENTS.length)];
+  const stage=getStage();
+  const imgFile=`event_${ev.key}_${stage.img}.png`;
+  const nImg=document.getElementById('natsuki-img');
+  const nIcon=document.getElementById('natsuki-icon');
+  // 画像を試し読み込み、失敗したらアイコンにフォールバック
+  const testImg=new Image();
+  testImg.onload=()=>{
+    nImg.src=imgFile;nImg.style.display='block';
+    nIcon.style.display='none';
+  };
+  testImg.onerror=()=>{
+    nIcon.textContent=ev.icon;nIcon.style.display='block';
+    nImg.style.display='none';
+  };
+  testImg.src=imgFile;
+  document.getElementById('natsuki-text').textContent=ev.text;
+  document.getElementById('natsuki-modal').classList.add('show');
+}
+function closeNatsuki(){
+  document.getElementById('natsuki-modal').classList.remove('show');
+}
+
+// 起動
 const savedAt=loadGame();
 setOutfit(currentOutfit);
 updateSaveInfo();
+renderSnacks();
 render();
-if(savedAt){
-  addLog('セーブデータをよみこんだ！おかえり🪰');
-}else{
-  addLog('ムスカムスカが誕生した。大切に育てよう！');
-}
+addLog(savedAt?'セーブデータをよみこんだ！おかえり🪰':'ムスカムスカが誕生した。大切に育てよう！');
 </script>
 </body>
 </html>
