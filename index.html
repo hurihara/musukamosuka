@@ -16,15 +16,10 @@
 body{font-family:'Zen Maru Gothic',sans-serif;background:var(--bg);min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:1rem;background-image:radial-gradient(circle at 10% 20%,rgba(90,200,150,0.15) 0%,transparent 50%),radial-gradient(circle at 90% 80%,rgba(58,173,160,0.12) 0%,transparent 50%);}
 #app{width:100%;max-width:400px;}
 .game-title{text-align:center;font-family:'Klee One',cursive;font-size:13px;color:var(--text3);letter-spacing:0.15em;margin-bottom:6px;padding-top:4px;}
-
-/* タブ */
 .tab-row{display:flex;gap:4px;margin-bottom:10px;}
 .tab-btn{flex:1;font-size:12px;font-weight:700;padding:8px 4px;border-radius:12px;border:1.5px solid var(--border);background:#fff9;color:var(--text2);cursor:pointer;font-family:inherit;transition:all 0.2s;}
 .tab-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
-
-/* ページ */
 .page{display:none;}.page.active{display:block;}
-
 .chara-card{background:var(--card);border:1.5px solid var(--border);border-radius:24px;padding:1.2rem 1rem 1rem;margin-bottom:10px;text-align:center;box-shadow:0 4px 20px rgba(90,160,80,0.12);position:relative;overflow:hidden;}
 .chara-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(90,200,150,0.1),transparent 70%);pointer-events:none;}
 #chara-img-wrap{width:180px;height:220px;margin:0 auto 4px;display:flex;align-items:center;justify-content:center;}
@@ -64,48 +59,23 @@ button.action-btn.highlight{border-color:var(--teal);background:rgba(58,173,160,
 .snack-chip{font-size:13px;padding:4px 10px;border-radius:100px;border:1.5px solid var(--border);background:#fff9;cursor:pointer;transition:all 0.2s;font-family:inherit;color:var(--text);}
 .snack-chip:hover{background:var(--bg2);}
 .snack-empty{font-size:12px;color:var(--text3);}
-
-/* ========== お部屋 ========== */
-#room-wrap{
-  background:var(--card);border:1.5px solid var(--border);border-radius:18px;
-  margin-bottom:10px;overflow:hidden;box-shadow:0 2px 10px rgba(90,160,80,0.08);
-}
-#room-canvas-wrap{
-  position:relative;width:100%;height:280px;overflow:hidden;cursor:default;touch-action:none;user-select:none;-webkit-user-select:none;
-}
+#room-wrap{background:var(--card);border:1.5px solid var(--border);border-radius:18px;margin-bottom:10px;overflow:hidden;box-shadow:0 2px 10px rgba(90,160,80,0.08);}
+#room-canvas-wrap{position:relative;width:100%;height:280px;overflow:hidden;cursor:default;touch-action:none;user-select:none;-webkit-user-select:none;}
 #room-bg{position:absolute;inset:0;transition:background 0.5s;}
 #room-floor{position:absolute;bottom:0;left:0;right:0;height:72px;transition:background 0.5s;}
-
-/* 家具 */
-.furniture{
-  position:absolute;font-size:28px;cursor:grab;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
-  transition:filter 0.15s;line-height:1;
-}
+.furniture{position:absolute;font-size:28px;cursor:grab;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;transition:filter 0.15s;line-height:1;}
 .furniture:hover{filter:drop-shadow(0 0 6px rgba(58,173,160,0.6));}
-.furniture-delete{
-  position:absolute;top:-10px;right:-10px;
-  width:22px;height:22px;border-radius:100px;
-  background:#e07a5f;color:#fff;border:none;
-  font-size:12px;cursor:pointer;display:none;
-  align-items:center;justify-content:center;
-  z-index:20;line-height:1;
-}
+.furniture-delete{position:absolute;top:-10px;right:-10px;width:22px;height:22px;border-radius:100px;background:#e07a5f;color:#fff;border:none;font-size:12px;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:20;line-height:1;}
 .furniture.selected .furniture-delete{display:flex;}
 .furniture.selected{filter:drop-shadow(0 0 8px rgba(224,122,95,0.7));}
 .furniture.dragging{cursor:grabbing;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.25));z-index:10;}
-
-/* むすむすSVGキャラ */
 #room-musumu{position:absolute;bottom:72px;width:44px;height:60px;pointer-events:none;transition:left 2s linear;}
-
-/* 部屋コントロール */
 .room-controls{padding:10px 12px;border-top:1px solid var(--border);}
 .room-ctrl-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
 .room-chip{font-size:11px;padding:4px 10px;border-radius:100px;border:1.5px solid var(--border);background:#fff9;cursor:pointer;font-family:inherit;color:var(--text2);transition:all 0.2s;}
 .room-chip:hover{background:var(--bg2);}
 .room-chip.active{background:var(--teal);color:#fff;border-color:var(--teal);}
 .room-subtitle{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.08em;margin-bottom:5px;}
-
-/* 家具インベントリ */
 .furniture-inv{display:flex;flex-wrap:wrap;gap:6px;}
 .inv-item{font-size:22px;padding:6px 10px;border-radius:12px;border:1.5px solid var(--border);background:#fff9;cursor:pointer;transition:all 0.2s;position:relative;}
 .inv-item:hover{background:var(--bg2);border-color:var(--teal);}
@@ -114,14 +84,10 @@ button.action-btn.highlight{border-color:var(--teal);background:rgba(58,173,160,
 .inv-item.selected .inv-sell{display:flex;}
 .inv-item.selected{border-color:var(--teal);background:var(--bg2);}
 .inv-empty{font-size:12px;color:var(--text3);}
-
-/* なつき度プレゼント */
 .gift-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
 .gift-item{font-size:12px;padding:5px 10px;border-radius:12px;border:1.5px solid var(--border);background:#fff9;color:var(--text2);}
 .gift-item.unlocked{background:#d4f0e0;border-color:#3aada0;color:#2d8a60;cursor:pointer;}
 .gift-item.unlocked:hover{background:#b8e8d0;}
-
-/* モーダル共通 */
 .modal-wrap{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:50;align-items:center;justify-content:center;}
 .modal-wrap.show{display:flex;}
 .modal-box{background:#fff;border-radius:24px;padding:1.5rem;max-width:300px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.15);}
@@ -130,22 +96,16 @@ button.action-btn.highlight{border-color:var(--teal);background:rgba(58,173,160,
 .modal-desc{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:12px;}
 .modal-result{font-size:12px;color:var(--teal);font-weight:700;margin-bottom:14px;}
 .modal-close{font-size:13px;padding:8px 24px;border-radius:100px;border:1.5px solid var(--border);background:var(--teal);color:#fff;cursor:pointer;font-family:inherit;}
-
-/* 懐きモーダル */
 .natsuki-box{background:#fff;border-radius:24px;padding:1.5rem 1.5rem 1.2rem;max-width:300px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(90,160,80,0.2);border:2px solid #b5d9a0;}
 .natsuki-icon{font-size:52px;margin-bottom:8px;animation:fuwa 2s ease-in-out infinite;}
 @keyframes fuwa{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .natsuki-title{font-size:13px;font-weight:700;color:var(--text3);letter-spacing:0.1em;margin-bottom:10px;}
 .natsuki-text{font-size:14px;color:var(--text);line-height:1.9;margin-bottom:14px;font-family:'Klee One',cursive;white-space:pre-line;}
 .natsuki-close{font-size:13px;padding:8px 24px;border-radius:100px;border:1.5px solid var(--border);background:var(--teal);color:#fff;cursor:pointer;font-family:inherit;}
-
-/* ギーーーッ */
 #gii-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:99;}
 .gii-msg{font-size:40px;font-weight:700;color:#2baa6a;font-family:'Zen Maru Gothic',sans-serif;display:none;border:3px solid #2baa6a;background:rgba(220,255,235,0.97);border-radius:100px;padding:12px 28px;}
 .gii-msg.show{display:block;animation:gii 1.6s ease forwards;}
 @keyframes gii{0%{opacity:0;transform:scale(0.4)}15%{opacity:1;transform:scale(1.15)}25%{transform:scale(0.95) rotate(-3deg)}35%{transform:scale(1.08) rotate(3deg)}45%{transform:scale(0.97) rotate(-2deg)}55%{transform:scale(1.04) rotate(1deg)}65%{transform:scale(1) rotate(0)}80%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(0.9) translateY(-16px)}}
-
-/* レベルアップ */
 #lvup-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:99;}
 .lvup-msg{font-size:28px;font-weight:700;color:#2d8a60;animation:lvup 1.3s ease forwards;display:none;font-family:'Klee One',cursive;}
 @keyframes lvup{0%{opacity:0;transform:scale(0.6) translateY(20px)}35%{opacity:1;transform:scale(1.1)}70%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(0.9) translateY(-20px)}}
@@ -153,8 +113,6 @@ button.action-btn.highlight{border-color:var(--teal);background:rgba(58,173,160,
 @keyframes bounce{0%,100%{transform:scale(1)}40%{transform:scale(1.1) rotate(-4deg)}70%{transform:scale(0.96) rotate(2deg)}}
 .save-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
 .coin-badge{font-size:13px;font-weight:700;color:#c49a2a;background:#fdf3d8;border:1.5px solid #e8c870;border-radius:100px;padding:3px 12px;}
-
-/* 確認ポップアップ */
 #confirm-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:200;align-items:center;justify-content:center;}
 #confirm-modal.show{display:flex;}
 .confirm-box{background:#fff;border-radius:20px;padding:1.4rem 1.2rem;max-width:260px;width:88%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.15);}
@@ -164,8 +122,6 @@ button.action-btn.highlight{border-color:var(--teal);background:rgba(58,173,160,
 .confirm-btn-cancel{flex:1;padding:9px;border-radius:12px;border:1.5px solid var(--border);background:#fff9;color:var(--text2);cursor:pointer;font-family:inherit;font-size:13px;}
 .confirm-btn-ok{flex:1;padding:9px;border-radius:12px;border:none;background:var(--teal);color:#fff;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;}
 .confirm-btn-ok.danger{background:#e07a5f;}
-
-/* ショップ */
 .shop-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px;}
 .shop-item{border:1.5px solid var(--border);border-radius:14px;background:#fff9;padding:10px 8px;text-align:center;cursor:pointer;transition:all 0.2s;font-family:inherit;}
 .shop-item:hover{background:var(--bg2);border-color:var(--teal);}
@@ -188,11 +144,12 @@ button.action-btn.highlight{border-color:var(--teal);background:rgba(58,173,160,
     <button class="reset-btn" onclick="resetGame()">🗑 リセット</button>
   </div>
 
-  <!-- タブ -->
+  <!-- タブ ここに日記タブを追加 -->
   <div class="tab-row">
     <button class="tab-btn active" onclick="switchTab('育てる')" id="tab-育てる">🪰 育てる</button>
     <button class="tab-btn" onclick="switchTab('お部屋')" id="tab-お部屋">🏠 お部屋</button>
     <button class="tab-btn" onclick="switchTab('ステータス')" id="tab-ステータス">📊 ステータス</button>
+    <button class="tab-btn" onclick="switchTab('日記')" id="tab-日記">📔 日記</button>
   </div>
 
   <!-- ===== 育てるページ ===== -->
@@ -214,7 +171,6 @@ button.action-btn.highlight{border-color:var(--teal);background:rgba(58,173,160,
         <span class="exp-num" id="exp-num">0/30</span>
       </div>
     </div>
-
     <div class="card">
       <div class="section-title">きもち</div>
       <div class="stat-row" style="margin-bottom:10px;">
@@ -237,7 +193,6 @@ button.action-btn.highlight{border-color:var(--teal);background:rgba(58,173,160,
         <span class="stat-val" id="val-clean">80</span>
       </div>
     </div>
-
     <div class="card">
       <div class="section-title">育てる</div>
       <div class="btn-grid">
@@ -255,12 +210,10 @@ button.action-btn.highlight{border-color:var(--teal);background:rgba(58,173,160,
         <label for="auto-cb">オート育成（3秒ごとに自動行動）</label>
       </div>
     </div>
-
     <div class="card">
       <div class="section-title">おやつストック</div>
       <div class="snack-grid" id="snack-grid"><span class="snack-empty">まだ何もない…お散歩で拾ってこよう</span></div>
     </div>
-
     <div class="card">
       <div class="section-title">ログ</div>
       <div class="log" id="log">ムスカムスカが誕生した。大切に育てよう！</div>
@@ -274,7 +227,6 @@ button.action-btn.highlight{border-color:var(--teal);background:rgba(58,173,160,
         <div id="room-bg"></div>
         <div id="room-floor"></div>
         <div id="room-furniture-layer"></div>
-        <!-- むすむすSVGアイコン -->
         <div id="room-musumu" style="left:40%;">
           <svg viewBox="0 0 130 120" xmlns="http://www.w3.org/2000/svg">
             <style>
@@ -341,6 +293,12 @@ button.action-btn.highlight{border-color:var(--teal);background:rgba(58,173,160,
       <div id="collection-list" style="font-size:13px;color:var(--text2);line-height:2;"></div>
     </div>
   </div>
+
+  <!-- ===== 日記ページ ===== -->
+  <div class="page" id="page-日記">
+    <!-- diary.js が中身を描画します -->
+  </div>
+
 </div>
 
 <!-- 懐きモーダル -->
@@ -390,6 +348,7 @@ button.action-btn.highlight{border-color:var(--teal);background:rgba(58,173,160,
 <div id="gii-overlay"><div class="gii-msg" id="gii-msg">ギーーーーッ！！</div></div>
 <div id="lvup-overlay"><div class="lvup-msg" id="lvup-msg"></div></div>
 
+<script src="diary.js"></script>
 <script>
 const STAGES=[
   {lv:1,name:"たまご期",img:"egg"},
@@ -416,12 +375,8 @@ const SNACKS={
   milk:  {label:"🥛 ぎゅうにゅう",hunger:15,love:8,clean:0,msg:"にんげんのんでた。のんでみた🥛"},
   vitamin:{label:"💊 ビタミン剤",hunger:5,love:0,clean:0,gii:true,msg:"にがい…"},
 };
-
-
-
-// 確認ポップアップ
 let confirmCallback=null;
-function showConfirm(title, desc, okLabel, onOk, danger=false){
+function showConfirm(title,desc,okLabel,onOk,danger=false){
   document.getElementById('confirm-title').textContent=title;
   document.getElementById('confirm-desc').textContent=desc;
   const okBtn=document.getElementById('confirm-ok');
@@ -430,195 +385,149 @@ function showConfirm(title, desc, okLabel, onOk, danger=false){
   okBtn.onclick=()=>{closeConfirm();onOk();};
   document.getElementById('confirm-modal').classList.add('show');
 }
-function closeConfirm(){
-  document.getElementById('confirm-modal').classList.remove('show');
-}
-
-// ショップ定義
+function closeConfirm(){document.getElementById('confirm-modal').classList.remove('show');}
 const SHOP_ITEMS=[
-  {key:"banana", label:"バナナの皮",   emoji:"🍌", price:2,  snack:"banana"},
-  {key:"milk",   label:"ぎゅうにゅう", emoji:"🥛", price:3,  snack:"milk"},
-  {key:"dango",  label:"みたらし団子", emoji:"🍡", price:5,  snack:"dango"},
-  {key:"kusaya", label:"くさやの干物", emoji:"🐟", price:6,  snack:"kusaya"},
-  {key:"cake",   label:"ケーキ",       emoji:"🧁", price:8,  snack:"cake"},
-  {key:"vitamin",label:"ビタミン剤",   emoji:"💊", price:2,  snack:"vitamin"},
+  {key:"banana",label:"バナナの皮",  emoji:"🍌",price:2,snack:"banana"},
+  {key:"milk",  label:"ぎゅうにゅう",emoji:"🥛",price:3,snack:"milk"},
+  {key:"dango", label:"みたらし団子",emoji:"🍡",price:5,snack:"dango"},
+  {key:"kusaya",label:"くさやの干物",emoji:"🐟",price:6,snack:"kusaya"},
+  {key:"cake",  label:"ケーキ",      emoji:"🧁",price:8,snack:"cake"},
+  {key:"vitamin",label:"ビタミン剤", emoji:"💊",price:2,snack:"vitamin"},
 ];
-
 const SHOP_FURNITURE=[
-  {key:"bed",      label:"ふわふわベッド",    price:15},
-  {key:"window",   label:"まるい窓",          price:12},
-  {key:"basket",   label:"洗濯かご",          price:8},
-  {key:"mushroom", label:"きのこのすわり台",  price:10},
-  {key:"lamp",     label:"まるいランプ",      price:12},
-  {key:"flytrap",  label:"ハエ取り器（飾り用）",price:20},
+  {key:"bed",     label:"ふわふわベッド",      price:15},
+  {key:"window",  label:"まるい窓",            price:12},
+  {key:"basket",  label:"洗濯かご",            price:8},
+  {key:"mushroom",label:"きのこのすわり台",    price:10},
+  {key:"lamp",    label:"まるいランプ",        price:12},
+  {key:"flytrap", label:"ハエ取り器（飾り用）",price:20},
 ];
-
-// 家具売却額
 const FURNITURE_SELL_PRICE={
   plant:3,chair:3,box:3,sign:3,flower:3,umbrella:3,
   bucket:3,candle:3,radio:3,stuffed:3,
   sofa:10,mirror:10,star:10,crown:10,nest:10,painting:10,
   bed:10,window:8,basket:5,mushroom:7,lamp:8,flytrap:14,
 };
-
 function sellFurniture(key){
-  const cnt=furnitureInventory[key]||0;
-  if(cnt<=0)return;
-  const price=FURNITURE_SELL_PRICE[key]||3;
-  const fd=FURNITURE_DEF[key];
-  showConfirm(
-    `${fd.label}を売る？`,
-    `${price}🪙 もらえます`,
-    '売る',
-    ()=>{
-      furnitureInventory[key]--;
-      state.coins=(state.coins||0)+price;
-      addLog(`${fd.label}を売って${price}🪙もらった！`);
-      updateCoinDisp();renderRoom();saveGame();
-    }
-  );
+  const cnt=furnitureInventory[key]||0;if(cnt<=0)return;
+  const price=FURNITURE_SELL_PRICE[key]||3;const fd=FURNITURE_DEF[key];
+  showConfirm(`${fd.label}を売る？`,`${price}🪙 もらえます`,'売る',()=>{
+    furnitureInventory[key]--;state.coins=(state.coins||0)+price;
+    addLog(`${fd.label}を売って${price}🪙もらった！`);
+    updateCoinDisp();renderRoom();saveGame();
+  });
 }
-
 function buyShopItem(item){
   if((state.coins||0)<item.price){addLog("コインが足りない…🪙");return;}
-  state.coins-=item.price;
-  snackStock.push(item.snack);
+  state.coins-=item.price;snackStock.push(item.snack);
   addLog(`${item.label}を買った！${item.price}🪙使った`);
   updateCoinDisp();renderSnacks();saveGame();
 }
-
 function buyShopFurniture(item){
   if((state.coins||0)<item.price){addLog("コインが足りない…🪙");return;}
-  showConfirm(
-    `${item.label}を買う？`,
-    `${item.price}🪙 使います`,
-    '買う！',
-    ()=>{
-      state.coins-=item.price;
-      furnitureInventory[item.key]=(furnitureInventory[item.key]||0)+1;
-      addLog(`${item.label}を買った！お部屋に飾ってあげよう🏠`);
-      updateCoinDisp();saveGame();renderShop();
-    }
-  );
+  showConfirm(`${item.label}を買う？`,`${item.price}🪙 使います`,'買う！',()=>{
+    state.coins-=item.price;
+    furnitureInventory[item.key]=(furnitureInventory[item.key]||0)+1;
+    addLog(`${item.label}を買った！お部屋に飾ってあげよう🏠`);
+    updateCoinDisp();saveGame();renderShop();
+  });
 }
-
-function updateCoinDisp(){
-  const el=document.getElementById('coin-disp');
-  if(el)el.textContent=state.coins||0;
-}
-
+function updateCoinDisp(){const el=document.getElementById('coin-disp');if(el)el.textContent=state.coins||0;}
 function renderShop(){
   const grid=document.getElementById('shop-grid');if(!grid)return;
   grid.innerHTML='';
-  // おやつセクション
   const t1=document.createElement('div');
   t1.style.cssText='grid-column:span 2;font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.08em;margin-bottom:2px;';
-  t1.textContent='🍙 おやつ';
-  grid.appendChild(t1);
+  t1.textContent='🍙 おやつ';grid.appendChild(t1);
   SHOP_ITEMS.forEach(item=>{
-    const div=document.createElement('div');
-    div.className='shop-item';
+    const div=document.createElement('div');div.className='shop-item';
     if((state.coins||0)<item.price)div.setAttribute('disabled','');
     div.innerHTML=`<span class="shop-emoji">${item.emoji}</span><span class="shop-name">${item.label}</span><span class="shop-price">🪙${item.price}</span>`;
-    div.onclick=()=>buyShopItem(item);
-    grid.appendChild(div);
+    div.onclick=()=>buyShopItem(item);grid.appendChild(div);
   });
-  // 家具セクション
   const t2=document.createElement('div');
   t2.style.cssText='grid-column:span 2;font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.08em;margin-top:10px;margin-bottom:2px;';
-  t2.textContent='🏠 かぐ（ショップ限定）';
-  grid.appendChild(t2);
+  t2.textContent='🏠 かぐ（ショップ限定）';grid.appendChild(t2);
   SHOP_FURNITURE.forEach(item=>{
-    const div=document.createElement('div');
-    div.className='shop-item';
+    const div=document.createElement('div');div.className='shop-item';
     if((state.coins||0)<item.price)div.setAttribute('disabled','');
-    const icon=document.createElement('span');
-    icon.style.cssText='width:36px;height:36px;display:block;margin:0 auto 4px;';
+    const icon=document.createElement('span');icon.style.cssText='width:36px;height:36px;display:block;margin:0 auto 4px;';
     if(FURNITURE_SVG[item.key])icon.innerHTML=FURNITURE_SVG[item.key];
     div.appendChild(icon);
     const name=document.createElement('span');name.className='shop-name';name.textContent=item.label;
     const price=document.createElement('span');price.className='shop-price';price.textContent=`🪙${item.price}`;
     div.appendChild(name);div.appendChild(document.createElement('br'));div.appendChild(price);
-    div.onclick=()=>buyShopFurniture(item);
-    grid.appendChild(div);
+    div.onclick=()=>buyShopFurniture(item);grid.appendChild(div);
   });
 }
-
-// 壁紙・床定義
 const WALLPAPERS=[
-  {id:"default", label:"☁️ デフォ",    bg:"linear-gradient(180deg,#c8e6f5 0%,#e8f5e3 100%)"},
-  {id:"grass",   label:"🌿 草原",       bg:"linear-gradient(180deg,#87ceeb 0%,#b8e896 100%)"},
-  {id:"night",   label:"🌙 夜空",       bg:"linear-gradient(180deg,#1a1a3e 0%,#2d1b5e 100%)"},
-  {id:"room",    label:"🏠 人間の部屋", bg:"linear-gradient(180deg,#f5e6c8 0%,#ead5aa 100%)"},
+  {id:"default",label:"☁️ デフォ",   bg:"linear-gradient(180deg,#c8e6f5 0%,#e8f5e3 100%)"},
+  {id:"grass",  label:"🌿 草原",      bg:"linear-gradient(180deg,#87ceeb 0%,#b8e896 100%)"},
+  {id:"night",  label:"🌙 夜空",      bg:"linear-gradient(180deg,#1a1a3e 0%,#2d1b5e 100%)"},
+  {id:"room",   label:"🏠 人間の部屋",bg:"linear-gradient(180deg,#f5e6c8 0%,#ead5aa 100%)"},
 ];
 const FLOORS=[
-  {id:"default", label:"🌱 土",  bg:"#8B6914"},
-  {id:"wood",    label:"🪵 木",  bg:"linear-gradient(90deg,#c8903c,#b07828,#c8903c,#b07828)"},
-  {id:"tile",    label:"⬜ タイル",bg:"repeating-linear-gradient(90deg,#e0e0e0 0px,#e0e0e0 29px,#ccc 29px,#ccc 30px)"},
-  {id:"grass",   label:"🌿 草",  bg:"#4a9e3f"},
+  {id:"default",label:"🌱 土", bg:"#8B6914"},
+  {id:"wood",   label:"🪵 木", bg:"linear-gradient(90deg,#c8903c,#b07828,#c8903c,#b07828)"},
+  {id:"tile",   label:"⬜ タイル",bg:"repeating-linear-gradient(90deg,#e0e0e0 0px,#e0e0e0 29px,#ccc 29px,#ccc 30px)"},
+  {id:"grass",  label:"🌿 草", bg:"#4a9e3f"},
 ];
-
-// 家具定義
 const FURNITURE_SVG={
   plant:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="22" rx="28" ry="10" fill="#4ecdc4" opacity="0.7"/><path d="M16 22 Q12 55 20 65 Q40 72 60 65 Q68 55 64 22Z" fill="#c49a2a"/><path d="M16 22 Q40 30 64 22" fill="none" stroke="#a07818" stroke-width="1.5"/><ellipse cx="40" cy="18" rx="14" ry="6" fill="#3a8a30"/><path d="M40 18 Q30 5 22 0" fill="none" stroke="#3a8a30" stroke-width="3" stroke-linecap="round"/><path d="M40 18 Q50 4 56 0" fill="none" stroke="#3a8a30" stroke-width="3" stroke-linecap="round"/><ellipse cx="22" cy="0" rx="7" ry="5" fill="#4ecdc4" transform="rotate(-20 22 0)"/><ellipse cx="56" cy="0" rx="7" ry="5" fill="#d4537e" transform="rotate(15 56 0)"/></svg>`,
   chair:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="4" width="52" height="22" rx="5" fill="#c8a67e"/><rect x="20" y="8" width="40" height="14" rx="3" fill="#d8b88e"/><rect x="10" y="32" width="60" height="10" rx="4" fill="#b8966e"/><rect x="14" y="42" width="8" height="28" rx="3" fill="#a07850"/><rect x="58" y="42" width="8" height="28" rx="3" fill="#a07850"/><rect x="14" y="26" width="6" height="44" rx="3" fill="#b8966e"/><rect x="60" y="26" width="6" height="44" rx="3" fill="#b8966e"/><rect x="20" y="54" width="40" height="4" rx="2" fill="#a07850"/></svg>`,
   box:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="26" width="64" height="42" rx="3" fill="#d4a85a"/><rect x="8" y="26" width="64" height="8" rx="3" fill="#c49848"/><path d="M8 30 Q24 20 40 26 Q56 20 72 30" fill="#e8c070"/><line x1="40" y1="26" x2="40" y2="68" stroke="#c49848" stroke-width="1.5"/><line x1="8" y1="47" x2="72" y2="47" stroke="#c49848" stroke-width="1"/></svg>`,
   sign:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="8" width="60" height="42" rx="4" fill="#3aada0"/><rect x="10" y="8" width="60" height="42" rx="4" fill="none" stroke="#2d8a80" stroke-width="2"/><rect x="16" y="14" width="48" height="30" rx="2" fill="#ffffff" opacity="0.9"/><line x1="40" y1="50" x2="40" y2="68" stroke="#5a7a48" stroke-width="3" stroke-linecap="round"/><line x1="28" y1="68" x2="52" y2="68" stroke="#5a7a48" stroke-width="3" stroke-linecap="round"/><text x="40" y="30" text-anchor="middle" font-size="9" fill="#2d4a1e" font-weight="bold" font-family="sans-serif">いらっしゃい</text><text x="40" y="42" text-anchor="middle" font-size="8" fill="#3aada0" font-family="sans-serif">ませ</text></svg>`,
   flower:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="45" x2="70" y2="45" stroke="#c49a2a" stroke-width="2"/><circle cx="22" cy="30" r="9" fill="#d4537e"/><circle cx="22" cy="30" r="5" fill="#f5ede0"/><circle cx="40" cy="25" r="9" fill="#4ecdc4"/><circle cx="40" cy="25" r="5" fill="#f5ede0"/><circle cx="58" cy="30" r="9" fill="#7f77dd"/><circle cx="58" cy="30" r="5" fill="#f5ede0"/><path d="M10 45 Q16 37 22 45" fill="none" stroke="#c49a2a" stroke-width="1.5"/><path d="M22 45 Q31 35 40 45" fill="none" stroke="#c49a2a" stroke-width="1.5"/><path d="M40 45 Q49 35 58 45" fill="none" stroke="#c49a2a" stroke-width="1.5"/><path d="M58 45 Q64 37 70 45" fill="none" stroke="#c49a2a" stroke-width="1.5"/></svg>`,
-  umbrella:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M20 52 Q18 72 24 76 Q40 80 56 76 Q62 72 60 52Z" fill="#3aada0"/><ellipse cx="40" cy="52" rx="20" ry="7" fill="#2d8a80"/><line x1="30" y1="50" x2="28" y2="8" stroke="#555" stroke-width="1.5" stroke-linecap="round"/><path d="M25 8 L21 16 L23 36 L25 48 L31 48 L33 36 L35 16 L31 8Z" fill="#7f77dd"/><line x1="27" y1="12" x2="27" y2="44" stroke="#6a62c0" stroke-width="0.8" opacity="0.7"/><line x1="31" y1="10" x2="31" y2="44" stroke="#6a62c0" stroke-width="0.8" opacity="0.7"/><line x1="27" y1="8" x2="29" y2="4" stroke="#555" stroke-width="1.5" stroke-linecap="round"/><path d="M26 50 Q26 56 20 56" fill="none" stroke="#555" stroke-width="2.5" stroke-linecap="round"/><line x1="46" y1="50" x2="44" y2="6" stroke="#555" stroke-width="1.5" stroke-linecap="round"/><path d="M41 6 L37 14 L39 36 L41 48 L47 48 L49 36 L51 14 L47 6Z" fill="#d4537e"/><line x1="41" y1="10" x2="41" y2="44" stroke="#b8366a" stroke-width="0.8" opacity="0.7"/><line x1="45" y1="8" x2="45" y2="44" stroke="#b8366a" stroke-width="0.8" opacity="0.7"/><line x1="41" y1="6" x2="43" y2="2" stroke="#555" stroke-width="1.5" stroke-linecap="round"/><path d="M48 50 Q48 57 54 57" fill="none" stroke="#555" stroke-width="2.5" stroke-linecap="round"/></svg>`,
+  umbrella:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M20 52 Q18 72 24 76 Q40 80 56 76 Q62 72 60 52Z" fill="#3aada0"/><ellipse cx="40" cy="52" rx="20" ry="7" fill="#2d8a80"/><line x1="30" y1="50" x2="28" y2="8" stroke="#555" stroke-width="1.5" stroke-linecap="round"/><path d="M25 8 L21 16 L23 36 L25 48 L31 48 L33 36 L35 16 L31 8Z" fill="#7f77dd"/><line x1="27" y1="8" x2="29" y2="4" stroke="#555" stroke-width="1.5" stroke-linecap="round"/><path d="M26 50 Q26 56 20 56" fill="none" stroke="#555" stroke-width="2.5" stroke-linecap="round"/><line x1="46" y1="50" x2="44" y2="6" stroke="#555" stroke-width="1.5" stroke-linecap="round"/><path d="M41 6 L37 14 L39 36 L41 48 L47 48 L49 36 L51 14 L47 6Z" fill="#d4537e"/><line x1="41" y1="6" x2="43" y2="2" stroke="#555" stroke-width="1.5" stroke-linecap="round"/><path d="M48 50 Q48 57 54 57" fill="none" stroke="#555" stroke-width="2.5" stroke-linecap="round"/></svg>`,
   sofa:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="36" width="72" height="28" rx="8" fill="#7f77dd"/><rect x="4" y="22" width="16" height="42" rx="6" fill="#6a62c0"/><rect x="60" y="22" width="16" height="42" rx="6" fill="#6a62c0"/><rect x="8" y="28" width="64" height="18" rx="6" fill="#9088e8"/><rect x="8" y="58" width="16" height="8" rx="3" fill="#5a5090"/><rect x="56" y="58" width="16" height="8" rx="3" fill="#5a5090"/></svg>`,
   mirror:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="18" y="4" width="44" height="56" rx="22" fill="#c8e8f0" stroke="#3aada0" stroke-width="3"/><rect x="24" y="10" width="32" height="44" rx="16" fill="#e8f5f8" opacity="0.8"/><ellipse cx="32" cy="22" rx="5" ry="8" fill="white" opacity="0.5" transform="rotate(-20 32 22)"/><rect x="34" y="60" width="12" height="8" rx="2" fill="#3aada0"/><rect x="24" y="66" width="32" height="6" rx="3" fill="#3aada0"/></svg>`,
   star:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><polygon points="40,5 52,25 68,28 55,42 58,58 40,50 22,58 25,42 12,28 28,25" fill="#ffd700" opacity="0.9"/><polygon points="40,12 50,28 62,30 52,42 54,54 40,47 26,54 28,42 18,30 30,28" fill="#ffe85a"/><circle cx="40" cy="35" r="8" fill="white" opacity="0.4"/></svg>`,
   crown:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M10 55 L10 28 L22 40 L40 16 L58 40 L70 28 L70 55Z" fill="#ffd700" stroke="#c49a2a" stroke-width="1.5"/><rect x="10" y="53" width="60" height="10" rx="3" fill="#c49a2a"/><circle cx="22" cy="38" r="4" fill="#d4537e"/><circle cx="40" cy="24" r="5" fill="#7f77dd"/><circle cx="58" cy="38" r="4" fill="#3aada0"/></svg>`,
-  bucket:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M20 32 Q20 14 40 12 Q60 14 60 32" fill="none" stroke="#5a7a48" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="32" r="3.5" fill="#5a7a48"/><circle cx="60" cy="32" r="3.5" fill="#5a7a48"/><path d="M16 32 Q14 64 22 70 Q40 76 58 70 Q66 64 64 32Z" fill="#3aada0"/><ellipse cx="40" cy="32" rx="24" ry="8" fill="#2d8a80"/><path d="M18 44 Q40 50 62 44" fill="none" stroke="#2d8a80" stroke-width="1.5"/><path d="M17 56 Q40 62 63 56" fill="none" stroke="#2d8a80" stroke-width="1"/></svg>`,
-  candle:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="72" rx="14" ry="4" fill="#e8d5b0" opacity="0.6"/><rect x="28" y="36" width="24" height="36" rx="4" fill="#f5ede0"/><rect x="28" y="36" width="24" height="36" rx="4" fill="none" stroke="#e0d0b8" stroke-width="1"/><rect x="32" y="40" width="4" height="26" fill="#e8d5b0" opacity="0.5"/><line x1="40" y1="36" x2="40" y2="24" stroke="#5a3a20" stroke-width="1.5" stroke-linecap="round"/><ellipse cx="40" cy="22" rx="4" ry="6" fill="#ffd700" opacity="0.9"/><ellipse cx="40" cy="20" rx="2.5" ry="4" fill="#ff8c00"/><ellipse cx="40" cy="19" rx="1.5" ry="2.5" fill="#fff"/></svg>`,
+  bucket:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M20 32 Q20 14 40 12 Q60 14 60 32" fill="none" stroke="#5a7a48" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="32" r="3.5" fill="#5a7a48"/><circle cx="60" cy="32" r="3.5" fill="#5a7a48"/><path d="M16 32 Q14 64 22 70 Q40 76 58 70 Q66 64 64 32Z" fill="#3aada0"/><ellipse cx="40" cy="32" rx="24" ry="8" fill="#2d8a80"/></svg>`,
+  candle:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="72" rx="14" ry="4" fill="#e8d5b0" opacity="0.6"/><rect x="28" y="36" width="24" height="36" rx="4" fill="#f5ede0"/><rect x="32" y="40" width="4" height="26" fill="#e8d5b0" opacity="0.5"/><line x1="40" y1="36" x2="40" y2="24" stroke="#5a3a20" stroke-width="1.5" stroke-linecap="round"/><ellipse cx="40" cy="22" rx="4" ry="6" fill="#ffd700" opacity="0.9"/><ellipse cx="40" cy="20" rx="2.5" ry="4" fill="#ff8c00"/><ellipse cx="40" cy="19" rx="1.5" ry="2.5" fill="#fff"/></svg>`,
   radio:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="22" width="64" height="46" rx="6" fill="#2a2a2a"/><rect x="12" y="26" width="38" height="26" rx="4" fill="#1a1a1a"/><circle cx="12" cy="14" r="7" fill="#aaa" stroke="#888" stroke-width="1"/><circle cx="12" cy="14" r="4" fill="#ccc"/><line x1="12" y1="7" x2="24" y2="22" stroke="#888" stroke-width="1.5"/><circle cx="57" cy="34" r="9" fill="#1a1a1a" stroke="#444" stroke-width="1.5"/><circle cx="57" cy="34" r="5" fill="#333"/><circle cx="57" cy="34" r="2" fill="#555"/><rect x="14" y="28" width="34" height="22" rx="3" fill="#3aada0" opacity="0.3"/><rect x="54" y="50" width="14" height="6" rx="2" fill="#444"/><rect x="12" y="54" width="8" height="10" rx="2" fill="#c49a2a"/></svg>`,
   stuffed:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="50" r="22" fill="#f0a0b8"/><circle cx="40" cy="28" r="16" fill="#f0a0b8"/><ellipse cx="27" cy="18" rx="7" ry="9" fill="#f0a0b8"/><ellipse cx="53" cy="18" rx="7" ry="9" fill="#f0a0b8"/><ellipse cx="27" cy="16" rx="4" ry="6" fill="#ffc0d0"/><ellipse cx="53" cy="16" rx="4" ry="6" fill="#ffc0d0"/><ellipse cx="33" cy="27" rx="5" ry="6" fill="#111"/><ellipse cx="47" cy="27" rx="5" ry="6" fill="#111"/><circle cx="31" cy="25" r="2" fill="white" opacity="0.8"/><circle cx="45" cy="25" r="2" fill="white" opacity="0.8"/><ellipse cx="40" cy="34" rx="5" ry="3" fill="#e07090"/></svg>`,
-  nest:`<svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><line x1="70" y1="75" x2="5" y2="45" stroke="#c49a2a" stroke-width="2.5" stroke-linecap="round"/><line x1="70" y1="75" x2="0" y2="68" stroke="#a07818" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="75" x2="8" y2="90" stroke="#d4a830" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="75" x2="18" y2="30" stroke="#b8900a" stroke-width="2.5" stroke-linecap="round"/><line x1="70" y1="75" x2="30" y2="18" stroke="#c49a2a" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="75" x2="15" y2="108" stroke="#a07818" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="75" x2="28" y2="115" stroke="#d4a830" stroke-width="2.5" stroke-linecap="round"/><line x1="70" y1="75" x2="42" y2="120" stroke="#b8900a" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="75" x2="42" y2="12" stroke="#c49a2a" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="75" x2="55" y2="6" stroke="#a07818" stroke-width="2.5" stroke-linecap="round"/><line x1="70" y1="75" x2="55" y2="122" stroke="#d4a830" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="75" x2="70" y2="4" stroke="#b8900a" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="75" x2="70" y2="125" stroke="#c49a2a" stroke-width="2.5" stroke-linecap="round"/><line x1="70" y1="75" x2="85" y2="6" stroke="#a07818" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="75" x2="85" y2="122" stroke="#d4a830" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="75" x2="98" y2="12" stroke="#b8900a" stroke-width="2.5" stroke-linecap="round"/><line x1="70" y1="75" x2="100" y2="120" stroke="#c49a2a" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="75" x2="113" y2="115" stroke="#a07818" stroke-width="2.5" stroke-linecap="round"/><line x1="70" y1="75" x2="125" y2="108" stroke="#d4a830" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="75" x2="122" y2="30" stroke="#b8900a" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="75" x2="132" y2="68" stroke="#c49a2a" stroke-width="2.5" stroke-linecap="round"/><line x1="70" y1="75" x2="135" y2="45" stroke="#a07818" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="75" x2="110" y2="18" stroke="#d4a830" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="75" x2="130" y2="90" stroke="#b8900a" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="70" cy="75" rx="50" ry="24" fill="none" stroke="#c49a2a" stroke-width="12"/><ellipse cx="70" cy="75" rx="50" ry="24" fill="none" stroke="#d4a830" stroke-width="5" stroke-dasharray="5,3" opacity="0.7"/><ellipse cx="70" cy="75" rx="36" ry="17" fill="#2a1f0e"/><ellipse cx="56" cy="77" rx="11" ry="9" fill="#f0ede0" transform="rotate(-15 56 77)"/><ellipse cx="71" cy="72" rx="11" ry="9" fill="#eeebd8"/><ellipse cx="86" cy="77" rx="11" ry="9" fill="#f0ede0" transform="rotate(15 86 77)"/><ellipse cx="53" cy="76" rx="2" ry="1.5" fill="#999" opacity="0.6" transform="rotate(-15 53 76)"/><ellipse cx="58" cy="80" rx="1.5" ry="1" fill="#999" opacity="0.5"/><ellipse cx="69" cy="71" rx="2" ry="1.5" fill="#999" opacity="0.6"/><ellipse cx="73" cy="75" rx="1.5" ry="1" fill="#999" opacity="0.5"/><ellipse cx="83" cy="76" rx="2" ry="1.5" fill="#999" opacity="0.6" transform="rotate(15 83 76)"/><ellipse cx="88" cy="80" rx="1.5" ry="1" fill="#999" opacity="0.5"/></svg>`,
-  bed:`<svg viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="76" width="8" height="18" rx="3" fill="#b8966e"/><rect x="66" y="76" width="8" height="18" rx="3" fill="#b8966e"/><rect x="2" y="52" width="76" height="28" rx="6" fill="#c8a67e"/><rect x="2" y="18" width="76" height="38" rx="10" fill="#b8966e"/><ellipse cx="40" cy="28" rx="24" ry="12" fill="#c8a67e"/><rect x="6" y="40" width="68" height="20" rx="8" fill="#f0e8f8"/><path d="M6 40 Q15 32 24 40 Q33 32 40 40 Q47 32 56 40 Q65 32 74 40" fill="#f0e8f8"/><path d="M6 40 Q15 33 24 40 Q33 33 40 40 Q47 33 56 40 Q65 33 74 40" fill="none" stroke="#e0d0f0" stroke-width="1.5"/><path d="M8 52 Q16 46 24 52 Q32 46 40 52 Q48 46 56 52 Q64 46 72 52 L72 68 Q64 62 56 68 Q48 62 40 68 Q32 62 24 68 Q16 62 8 68Z" fill="#b8a0e0"/><path d="M8 52 Q16 46 24 52 Q32 46 40 52 Q48 46 56 52 Q64 46 72 52" fill="none" stroke="#c8b0f0" stroke-width="1.5"/><ellipse cx="22" cy="42" rx="13" ry="8" fill="#e8d8f8"/><ellipse cx="58" cy="42" rx="13" ry="8" fill="#e8d8f8"/><ellipse cx="22" cy="42" rx="7" ry="4" fill="#dcc8f0" opacity="0.5"/><ellipse cx="58" cy="42" rx="7" ry="4" fill="#dcc8f0" opacity="0.5"/></svg>`,
-  window:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="34" fill="#3aada0" stroke="#2d8a80" stroke-width="2"/><circle cx="40" cy="40" r="28" fill="#c8e8f0"/><ellipse cx="30" cy="28" rx="8" ry="12" fill="white" opacity="0.4" transform="rotate(-20 30 28)"/><line x1="40" y1="12" x2="40" y2="68" stroke="#3aada0" stroke-width="3"/><line x1="12" y1="40" x2="68" y2="40" stroke="#3aada0" stroke-width="3"/><circle cx="28" cy="32" r="4" fill="#2d4a1e" opacity="0.3"/><rect x="25" y="36" width="6" height="8" rx="2" fill="#2d4a1e" opacity="0.3"/><circle cx="52" cy="35" r="3" fill="#2d4a1e" opacity="0.3"/><rect x="50" y="38" width="5" height="7" rx="2" fill="#2d4a1e" opacity="0.3"/></svg>`,
-  basket:`<svg viewBox="0 0 80 90" xmlns="http://www.w3.org/2000/svg"><path d="M12 28 Q10 72 18 76 Q40 82 62 76 Q70 72 68 28Z" fill="#d4a85a"/><path d="M14 36 Q40 44 66 36" fill="none" stroke="#b8900a" stroke-width="1.2"/><path d="M13 48 Q40 56 67 48" fill="none" stroke="#b8900a" stroke-width="1.2"/><path d="M12 60 Q40 68 68 60" fill="none" stroke="#b8900a" stroke-width="1.2"/><line x1="25" y1="28" x2="22" y2="76" stroke="#b8900a" stroke-width="1"/><line x1="40" y1="28" x2="40" y2="76" stroke="#b8900a" stroke-width="1"/><line x1="55" y1="28" x2="58" y2="76" stroke="#b8900a" stroke-width="1"/><ellipse cx="40" cy="28" rx="28" ry="9" fill="#c49848"/><ellipse cx="40" cy="26" rx="22" ry="6" fill="#d4a85a"/><path d="M28 22 Q40 14 52 22" fill="none" stroke="#b8900a" stroke-width="3" stroke-linecap="round"/><path d="M30 26 Q35 18 38 24" fill="none" stroke="#7f77dd" stroke-width="3" stroke-linecap="round"/></svg>`,
-  mushroom:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="50" width="20" height="28" rx="6" fill="#f5ede0"/><ellipse cx="40" cy="50" rx="34" ry="18" fill="#e07a5f"/><ellipse cx="40" cy="46" rx="30" ry="14" fill="#e8906e"/><circle cx="26" cy="44" r="4" fill="#f5ede0" opacity="0.9"/><circle cx="40" cy="38" r="5" fill="#f5ede0" opacity="0.9"/><circle cx="54" cy="44" r="4" fill="#f5ede0" opacity="0.9"/><circle cx="32" cy="50" r="3" fill="#f5ede0" opacity="0.8"/><circle cx="50" cy="50" r="3" fill="#f5ede0" opacity="0.8"/><ellipse cx="40" cy="46" rx="18" ry="8" fill="#f5ede0" opacity="0.5"/><ellipse cx="40" cy="78" rx="16" ry="5" fill="#e8ddd0"/></svg>`,
-  lamp:`<svg viewBox="0 0 80 90" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="32" r="22" fill="#fdf3d0"/><circle cx="40" cy="32" r="22" fill="none" stroke="#e8c870" stroke-width="2"/><ellipse cx="32" cy="24" rx="7" ry="9" fill="white" opacity="0.5" transform="rotate(-20 32 24)"/><path d="M32 36 Q36 28 40 36 Q44 28 48 36" fill="none" stroke="#c49a2a" stroke-width="1.5"/><rect x="32" y="52" width="16" height="8" rx="2" fill="#aaa"/><rect x="34" y="58" width="12" height="5" rx="2" fill="#888"/><path d="M40 63 Q40 72 40 76" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"/><ellipse cx="40" cy="76" rx="18" ry="5" fill="#3aada0"/><rect x="26" y="72" width="28" height="6" rx="3" fill="#3aada0"/></svg>`,
-  flytrap:`<svg viewBox="0 0 80 90" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="62" width="72" height="8" rx="3" fill="#c8a67e"/><path d="M8 62 Q14 50 20 62 Q26 50 32 62 Q38 50 44 62 Q50 50 56 62 Q62 50 68 62" fill="none" stroke="#888" stroke-width="2.5" stroke-linecap="round"/><rect x="20" y="54" width="40" height="8" rx="2" fill="#d4a85a" stroke="#b8900a" stroke-width="1"/><path d="M34 44 L46 44 L50 54 L30 54Z" fill="#ffd700"/><circle cx="37" cy="50" r="2" fill="#e8c000"/><circle cx="43" cy="47" r="1.5" fill="#e8c000"/><rect x="36" y="40" width="8" height="6" rx="2" fill="#888"/><path d="M8 62 Q8 30 40 20 Q72 30 72 62" fill="none" stroke="#aaa" stroke-width="2.5" stroke-linecap="round"/><rect x="0" y="0" width="80" height="80" rx="6" fill="none" stroke="#c49a2a" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.4"/></svg>`,
+  nest:`<svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><line x1="70" y1="75" x2="5" y2="45" stroke="#c49a2a" stroke-width="2.5" stroke-linecap="round"/><line x1="70" y1="75" x2="0" y2="68" stroke="#a07818" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="75" x2="8" y2="90" stroke="#d4a830" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="75" x2="70" y2="4" stroke="#b8900a" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="75" x2="70" y2="125" stroke="#c49a2a" stroke-width="2.5" stroke-linecap="round"/><line x1="70" y1="75" x2="132" y2="68" stroke="#c49a2a" stroke-width="2.5" stroke-linecap="round"/><line x1="70" y1="75" x2="135" y2="45" stroke="#a07818" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="75" x2="130" y2="90" stroke="#b8900a" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="70" cy="75" rx="50" ry="24" fill="none" stroke="#c49a2a" stroke-width="12"/><ellipse cx="70" cy="75" rx="50" ry="24" fill="none" stroke="#d4a830" stroke-width="5" stroke-dasharray="5,3" opacity="0.7"/><ellipse cx="70" cy="75" rx="36" ry="17" fill="#2a1f0e"/><ellipse cx="56" cy="77" rx="11" ry="9" fill="#f0ede0" transform="rotate(-15 56 77)"/><ellipse cx="71" cy="72" rx="11" ry="9" fill="#eeebd8"/><ellipse cx="86" cy="77" rx="11" ry="9" fill="#f0ede0" transform="rotate(15 86 77)"/></svg>`,
+  bed:`<svg viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="76" width="8" height="18" rx="3" fill="#b8966e"/><rect x="66" y="76" width="8" height="18" rx="3" fill="#b8966e"/><rect x="2" y="52" width="76" height="28" rx="6" fill="#c8a67e"/><rect x="2" y="18" width="76" height="38" rx="10" fill="#b8966e"/><ellipse cx="40" cy="28" rx="24" ry="12" fill="#c8a67e"/><rect x="6" y="40" width="68" height="20" rx="8" fill="#f0e8f8"/><path d="M8 52 Q16 46 24 52 Q32 46 40 52 Q48 46 56 52 Q64 46 72 52 L72 68 Q64 62 56 68 Q48 62 40 68 Q32 62 24 68 Q16 62 8 68Z" fill="#b8a0e0"/><ellipse cx="22" cy="42" rx="13" ry="8" fill="#e8d8f8"/><ellipse cx="58" cy="42" rx="13" ry="8" fill="#e8d8f8"/></svg>`,
+  window:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="34" fill="#3aada0" stroke="#2d8a80" stroke-width="2"/><circle cx="40" cy="40" r="28" fill="#c8e8f0"/><ellipse cx="30" cy="28" rx="8" ry="12" fill="white" opacity="0.4" transform="rotate(-20 30 28)"/><line x1="40" y1="12" x2="40" y2="68" stroke="#3aada0" stroke-width="3"/><line x1="12" y1="40" x2="68" y2="40" stroke="#3aada0" stroke-width="3"/></svg>`,
+  basket:`<svg viewBox="0 0 80 90" xmlns="http://www.w3.org/2000/svg"><path d="M12 28 Q10 72 18 76 Q40 82 62 76 Q70 72 68 28Z" fill="#d4a85a"/><path d="M14 36 Q40 44 66 36" fill="none" stroke="#b8900a" stroke-width="1.2"/><path d="M13 48 Q40 56 67 48" fill="none" stroke="#b8900a" stroke-width="1.2"/><path d="M12 60 Q40 68 68 60" fill="none" stroke="#b8900a" stroke-width="1.2"/><ellipse cx="40" cy="28" rx="28" ry="9" fill="#c49848"/><ellipse cx="40" cy="26" rx="22" ry="6" fill="#d4a85a"/><path d="M28 22 Q40 14 52 22" fill="none" stroke="#b8900a" stroke-width="3" stroke-linecap="round"/></svg>`,
+  mushroom:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="50" width="20" height="28" rx="6" fill="#f5ede0"/><ellipse cx="40" cy="50" rx="34" ry="18" fill="#e07a5f"/><ellipse cx="40" cy="46" rx="30" ry="14" fill="#e8906e"/><circle cx="26" cy="44" r="4" fill="#f5ede0" opacity="0.9"/><circle cx="40" cy="38" r="5" fill="#f5ede0" opacity="0.9"/><circle cx="54" cy="44" r="4" fill="#f5ede0" opacity="0.9"/><ellipse cx="40" cy="78" rx="16" ry="5" fill="#e8ddd0"/></svg>`,
+  lamp:`<svg viewBox="0 0 80 90" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="32" r="22" fill="#fdf3d0"/><circle cx="40" cy="32" r="22" fill="none" stroke="#e8c870" stroke-width="2"/><ellipse cx="32" cy="24" rx="7" ry="9" fill="white" opacity="0.5" transform="rotate(-20 32 24)"/><rect x="32" y="52" width="16" height="8" rx="2" fill="#aaa"/><path d="M40 63 Q40 72 40 76" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"/><ellipse cx="40" cy="76" rx="18" ry="5" fill="#3aada0"/><rect x="26" y="72" width="28" height="6" rx="3" fill="#3aada0"/></svg>`,
+  flytrap:`<svg viewBox="0 0 80 90" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="62" width="72" height="8" rx="3" fill="#c8a67e"/><path d="M8 62 Q14 50 20 62 Q26 50 32 62 Q38 50 44 62 Q50 50 56 62 Q62 50 68 62" fill="none" stroke="#888" stroke-width="2.5" stroke-linecap="round"/><rect x="20" y="54" width="40" height="8" rx="2" fill="#d4a85a" stroke="#b8900a" stroke-width="1"/><path d="M34 44 L46 44 L50 54 L30 54Z" fill="#ffd700"/><rect x="36" y="40" width="8" height="6" rx="2" fill="#888"/><path d="M8 62 Q8 30 40 20 Q72 30 72 62" fill="none" stroke="#aaa" stroke-width="2.5" stroke-linecap="round"/></svg>`,
   painting:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="4" width="64" height="54" rx="3" fill="#c49a2a"/><rect x="14" y="10" width="52" height="42" rx="2" fill="#f5ede0"/><ellipse cx="40" cy="28" rx="14" ry="10" fill="#87ceeb"/><ellipse cx="24" cy="38" rx="8" ry="6" fill="#4ecdc4" opacity="0.7"/><ellipse cx="52" cy="40" rx="6" ry="5" fill="#d4537e" opacity="0.6"/><circle cx="40" cy="24" r="5" fill="#ffd700" opacity="0.8"/><rect x="32" y="58" width="16" height="6" rx="2" fill="#a07818"/></svg>`,
 };
-
 const FURNITURE_DEF={
-  plant:   {label:"植木鉢",    source:"walk_park"},
-  chair:   {label:"ボロい椅子", source:"walk_trash"},
-  box:     {label:"ダンボール", source:"walk_store"},
-  sign:    {label:"小さな看板", source:"walk_bus"},
-  flower:  {label:"花かざり",  source:"walk_flower"},
-  umbrella:{label:"傘立て",    source:"walk_rain"},
-  sofa:    {label:"ソファ",    source:"gift_50"},
-  mirror:  {label:"鏡",        source:"gift_70"},
-  star:    {label:"光る石",    source:"gift_90"},
-  crown:   {label:"王冠オブジェ",source:"gift_100"},
-  bucket:  {label:"バケツ",    source:"walk_trash"},
-  candle:  {label:"ろうそく",  source:"walk_flower"},
-  radio:   {label:"ラジオ",    source:"walk_store"},
-  stuffed: {label:"ぬいぐるみ",source:"walk_park"},
-  nest:    {label:"巣",        source:"gift_60"},
-  painting:{label:"絵",        source:"gift_80"},
-  bed:     {label:"ふわふわベッド",  source:"shop"},
+  plant:   {label:"植木鉢",         source:"walk_park"},
+  chair:   {label:"ボロい椅子",     source:"walk_trash"},
+  box:     {label:"ダンボール",     source:"walk_store"},
+  sign:    {label:"小さな看板",     source:"walk_bus"},
+  flower:  {label:"花かざり",       source:"walk_flower"},
+  umbrella:{label:"傘立て",         source:"walk_rain"},
+  sofa:    {label:"ソファ",         source:"gift_50"},
+  mirror:  {label:"鏡",             source:"gift_70"},
+  star:    {label:"光る石",         source:"gift_90"},
+  crown:   {label:"王冠オブジェ",   source:"gift_100"},
+  bucket:  {label:"バケツ",         source:"walk_trash"},
+  candle:  {label:"ろうそく",       source:"walk_flower"},
+  radio:   {label:"ラジオ",         source:"walk_store"},
+  stuffed: {label:"ぬいぐるみ",     source:"walk_park"},
+  nest:    {label:"巣",             source:"gift_60"},
+  painting:{label:"絵",             source:"gift_80"},
+  bed:     {label:"ふわふわベッド", source:"shop"},
   window:  {label:"まるい窓",       source:"shop"},
   basket:  {label:"洗濯かご",       source:"shop"},
   mushroom:{label:"きのこのすわり台",source:"shop"},
-  lamp:    {label:"まるいランプ",    source:"shop"},
+  lamp:    {label:"まるいランプ",   source:"shop"},
   flytrap: {label:"ハエ取り器（飾り用）",source:"shop"},
 };
-
-// なつき度プレゼント
 const GIFTS=[
-  {lv:50,  key:"sofa",    icon:"🛋️", label:"ソファをもらった！"},
-  {lv:60,  key:"nest",    icon:"🪹", label:"巣をもらった！"},
-  {lv:70,  key:"mirror",  icon:"🪞", label:"鏡をもらった！"},
-  {lv:80,  key:"painting",icon:"🖼️", label:"絵をもらった！"},
-  {lv:90,  key:"star",    icon:"⭐", label:"光る石をもらった！"},
-  {lv:100, key:"crown",   icon:"👑", label:"王冠オブジェをもらった！"},
+  {lv:50, key:"sofa",    icon:"🛋️",label:"ソファをもらった！"},
+  {lv:60, key:"nest",    icon:"🪹",label:"巣をもらった！"},
+  {lv:70, key:"mirror",  icon:"🪞",label:"鏡をもらった！"},
+  {lv:80, key:"painting",icon:"🖼️",label:"絵をもらった！"},
+  {lv:90, key:"star",    icon:"⭐",label:"光る石をもらった！"},
+  {lv:100,key:"crown",   icon:"👑",label:"王冠オブジェをもらった！"},
 ];
-
 const WALK_EVENTS=[
   {scene:"🌳",place:"公園",events:[
     {desc:"人間の子どもと目が合った…！",result:"なつき度UP！",love:12,clean:-5,snack:null,furniture:null},
@@ -653,7 +562,6 @@ const WALK_EVENTS=[
     {desc:"ハエ叩きを持った人間が傘さして歩いてた。",result:"こわかった…",love:-8,clean:-10,snack:null,furniture:null,gii:true},
   ]},
 ];
-
 const ACTIONS={
   train:{energy:-20,str:5,spd:2,hunger:-10,clean:-8,logs:["汗だくで特訓した！💪","壁を100回殴った…","稽古で一皮むけた！"]},
   study:{energy:-15,mag:5,luk:2,hunger:-8,clean:-3,logs:["魔法書を読みふけった✨","難しい呪文を解読した","図書館に引きこもった…"]},
@@ -663,16 +571,15 @@ const ACTIONS={
   bath: {energy:-5,clean:40,love:8,logs:["ぴかぴか！これで人間に近づける…！🛁","きれいになった🫧","しゅわしゅわして気持ちよかった"]},
   pet:  {love:15,energy:-2,logs:["（うれしそうにしてる）💗","（なでられてにこにこしてる）🌸","（すこし照れてる…かわいい）"]},
 };
-
 const PERSONALITIES={
-  train: {name:"やんちゃ",   emoji:"💪",color:"#e07a5f",bg:"#fdeee8",desc:"ちからの成長が1.5倍。なつき度が上がりにくい。",strMult:1.5,loveMult:0.7},
-  study: {name:"物知り",     emoji:"📖",color:"#7f77dd",bg:"#eeedf8",desc:"まほうの成長が1.5倍。おなかが減りにくい。",magMult:1.5,hungerMult:0.7},
-  play:  {name:"陽気",       emoji:"🎉",color:"#c49a2a",bg:"#fdf3d8",desc:"こうんの成長が1.5倍。なつき度の上下が激しい。",lukMult:1.5,loveMult:1.4},
-  rest:  {name:"のんびり",   emoji:"🌙",color:"#3aada0",bg:"#e0f5f3",desc:"たいりょくの成長が1.5倍。エネルギー回復が速い。",hpMult:1.5},
-  bath:  {name:"きれい好き", emoji:"🛁",color:"#5aaddd",bg:"#e0f0fa",desc:"清潔度が下がりにくい。お風呂の効果が1.5倍。",cleanDecayMult:0.5,bathMult:1.5},
-  pet:   {name:"あまえんぼ", emoji:"🫶",color:"#d4537e",bg:"#fde8ef",desc:"なつき度が上がりやすい。でも下がりやすい。",loveMult:1.5},
-  feed:  {name:"食いしん坊", emoji:"🍙",color:"#ba7517",bg:"#fdf0d8",desc:"ごはんの効果が1.5倍。おなかが減りやすい。",feedMult:1.5},
-  walk:  {name:"さすらい",   emoji:"🚶",color:"#2d8a60",bg:"#d4f0e0",desc:"散歩EXPが1.5倍。清潔度が下がりにくい。",walkExpMult:1.5,cleanDecayMult:0.6},
+  train:{name:"やんちゃ",  emoji:"💪",color:"#e07a5f",bg:"#fdeee8",desc:"ちからの成長が1.5倍。なつき度が上がりにくい。",strMult:1.5,loveMult:0.7},
+  study:{name:"物知り",    emoji:"📖",color:"#7f77dd",bg:"#eeedf8",desc:"まほうの成長が1.5倍。おなかが減りにくい。",magMult:1.5,hungerMult:0.7},
+  play: {name:"陽気",      emoji:"🎉",color:"#c49a2a",bg:"#fdf3d8",desc:"こうんの成長が1.5倍。なつき度の上下が激しい。",lukMult:1.5,loveMult:1.4},
+  rest: {name:"のんびり",  emoji:"🌙",color:"#3aada0",bg:"#e0f5f3",desc:"たいりょくの成長が1.5倍。エネルギー回復が速い。",hpMult:1.5},
+  bath: {name:"きれい好き",emoji:"🛁",color:"#5aaddd",bg:"#e0f0fa",desc:"清潔度が下がりにくい。お風呂の効果が1.5倍。",cleanDecayMult:0.5,bathMult:1.5},
+  pet:  {name:"あまえんぼ",emoji:"🫶",color:"#d4537e",bg:"#fde8ef",desc:"なつき度が上がりやすい。でも下がりやすい。",loveMult:1.5},
+  feed: {name:"食いしん坊",emoji:"🍙",color:"#ba7517",bg:"#fdf0d8",desc:"ごはんの効果が1.5倍。おなかが減りやすい。",feedMult:1.5},
+  walk: {name:"さすらい",  emoji:"🚶",color:"#2d8a60",bg:"#d4f0e0",desc:"散歩EXPが1.5倍。清潔度が下がりにくい。",walkExpMult:1.5,cleanDecayMult:0.6},
 };
 function getPersonality(){
   const c=state.actionCount||{};let mx=null,mv=0,tot=0;
@@ -683,11 +590,9 @@ function applyMult(type,val){
   const p=getPersonality();if(!p||!val)return val;
   return p[type+'Mult']?Math.round(val*p[type+'Mult']):val;
 }
-
 const SAVE_KEY='musukamosuka_save';
 const DEFAULT_STATE={lv:1,exp:0,str:10,mag:10,spd:10,hp:10,luk:10,energy:70,love:30,hunger:70,clean:80,coins:0,busy:false,
   actionCount:{train:0,study:0,play:0,rest:0,bath:0,pet:0,feed:0,walk:0}};
-
 function saveGame(){
   const d={state:{...state,busy:false,coins:state.coins||0},outfit:currentOutfit,snacks:[...snackStock],
     furniture:furnitureInventory,roomData:{wallpaper:currentWallpaper,floor:currentFloor,placed:[...placedFurniture]},
@@ -699,23 +604,14 @@ function loadGame(){
     const raw=localStorage.getItem(SAVE_KEY);if(!raw)return false;
     const d=JSON.parse(raw);
     state={...DEFAULT_STATE,...d.state,busy:false,actionCount:{...DEFAULT_STATE.actionCount,...(d.state?.actionCount||{})}};
-    currentOutfit=d.outfit||'default';
-    snackStock=d.snacks||[];
+    currentOutfit=d.outfit||'default';snackStock=d.snacks||[];
     furnitureInventory={...d.furniture||{}};
     if(d.roomData){currentWallpaper=d.roomData.wallpaper||'default';currentFloor=d.roomData.floor||'default';placedFurniture=[...d.roomData.placed||[]];}
-    giftGiven=new Set(d.giftGiven||[]);
-    return d.savedAt||null;
+    giftGiven=new Set(d.giftGiven||[]);return d.savedAt||null;
   }catch(e){return false;}
 }
 function resetGame(){
-  showConfirm(
-    'リセットする？',
-    'セーブデータが全部消えます',
-    'リセット',
-    ()=>_doReset(),
-    true
-  );
-  return;
+  showConfirm('リセットする？','セーブデータが全部消えます','リセット',()=>_doReset(),true);
 }
 function _doReset(){
   localStorage.removeItem(SAVE_KEY);
@@ -732,19 +628,16 @@ function updateSaveInfo(){
     el.textContent=`💾 ${dt.getMonth()+1}/${dt.getDate()} ${dt.getHours()}:${String(dt.getMinutes()).padStart(2,'0')} 自動セーブ済み`;
   }catch{el.textContent='💾 セーブあり';}
 }
-
 let state={...DEFAULT_STATE};
 let autoTimer=null,currentOutfit='default',snackStock=[];
-let furnitureInventory={};
-let placedFurniture=[];
+let furnitureInventory={},placedFurniture=[];
 let currentWallpaper='default',currentFloor='default';
 let giftGiven=new Set();
-
 function getStage(){let s=STAGES[0];for(const st of STAGES)if(state.lv>=st.lv)s=st;return s;}
 function getMood(){for(const m of MOODS)if(state.love>=m.min)return m;return MOODS[MOODS.length-1];}
 function cap(v,mn=0,mx=100){return Math.min(mx,Math.max(mn,v));}
 
-// タブ切り替え
+// ★ switchTab に日記を追加
 function switchTab(name){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -752,6 +645,7 @@ function switchTab(name){
   document.getElementById('page-'+name).classList.add('active');
   if(name==='お部屋')renderRoom();
   if(name==='ステータス'){renderCollection();renderShop();}
+  if(name==='日記')renderDiaryPage(state,getPersonality);
 }
 
 function setOutfit(name){
@@ -764,7 +658,6 @@ function updateCharaImg(){
   const img=document.getElementById('chara-img');
   img.style.opacity='0';setTimeout(()=>{img.src=src;img.style.opacity='1';},150);
 }
-
 function doAction(type){
   if(state.busy)return;
   const a=ACTIONS[type];
@@ -786,15 +679,12 @@ function doAction(type){
   checkLevelUp();checkGifts();bounceChara();render();saveGame();
   setTimeout(()=>{state.busy=false;setBtns(false);tryNatsukiEvent();},700);
 }
-
 function eatSnack(key){
   if(state.busy)return;
   const s=SNACKS[key];if(!s)return;
   const idx=snackStock.indexOf(key);if(idx===-1)return;
   snackStock.splice(idx,1);addLog(s.msg);
-  state.hunger=cap(state.hunger+s.hunger);
-  state.love=cap(state.love+s.love);
-  state.clean=cap(state.clean+s.clean);
+  state.hunger=cap(state.hunger+s.hunger);state.love=cap(state.love+s.love);state.clean=cap(state.clean+s.clean);
   if(s.gii)showGii();else bounceChara();
   render();renderSnacks();saveGame();
 }
@@ -806,11 +696,9 @@ function renderSnacks(){
   for(const[key,c]of Object.entries(cnt)){
     const s=SNACKS[key];if(!s)continue;
     const btn=document.createElement('button');btn.className='snack-chip';
-    btn.textContent=`${s.label}×${c}`;btn.onclick=()=>eatSnack(key);
-    grid.appendChild(btn);
+    btn.textContent=`${s.label}×${c}`;btn.onclick=()=>eatSnack(key);grid.appendChild(btn);
   }
 }
-
 function goWalk(){
   if(state.busy)return;
   if(state.clean<20){addLog("よごれすぎてて外に出られない…お風呂に入ろう🛁");return;}
@@ -843,90 +731,61 @@ function closeWalk(){
   document.getElementById('walk-modal').classList.remove('show');
   bounceChara();state.busy=false;setBtns(false);
 }
-
-// なつき度プレゼント
 function checkGifts(){
   for(const g of GIFTS){
     if(!giftGiven.has(g.key)&&state.love>=g.lv){
       giftGiven.add(g.key);
       furnitureInventory[g.key]=(furnitureInventory[g.key]||0)+1;
-      const gsvg=FURNITURE_SVG[g.key];document.getElementById('gift-scene').innerHTML=gsvg?`<div style="width:72px;height:72px;margin:0 auto">${gsvg}</div>`:(g.icon||'🎁');
+      const gsvg=FURNITURE_SVG[g.key];
+      document.getElementById('gift-scene').innerHTML=gsvg?`<div style="width:72px;height:72px;margin:0 auto">${gsvg}</div>`:(g.icon||'🎁');
       document.getElementById('gift-desc').textContent=`なつき度${g.lv}に達した！\n${g.label}\nお部屋に飾ってあげよう🏠`;
       document.getElementById('gift-modal').classList.add('show');
-      renderGiftRow();
-      break;
+      renderGiftRow();break;
     }
   }
 }
 function closeGift(){document.getElementById('gift-modal').classList.remove('show');saveGame();}
-
 function renderGiftRow(){
   const row=document.getElementById('gift-row');if(!row)return;
   row.innerHTML='';
   for(const g of GIFTS){
     const unlocked=giftGiven.has(g.key)||state.love>=g.lv;
-    const div=document.createElement('div');
-    div.className='gift-item'+(unlocked?' unlocked':'');
+    const div=document.createElement('div');div.className='gift-item'+(unlocked?' unlocked':'');
     div.innerHTML=`${g.icon} なつき度${g.lv}`;
     if(unlocked)div.title=(FURNITURE_DEF[g.key]?.label||g.key)+'をゲット済み';
     row.appendChild(div);
   }
 }
-
-// ========== お部屋 ==========
 let dragTarget=null,dragOffX=0,dragOffY=0;
-
 function renderRoom(){
-  // 壁紙
   const wp=WALLPAPERS.find(w=>w.id===currentWallpaper)||WALLPAPERS[0];
   document.getElementById('room-bg').style.background=wp.bg;
-  // 床
   const fl=FLOORS.find(f=>f.id===currentFloor)||FLOORS[0];
   document.getElementById('room-floor').style.background=fl.bg;
-  // 壁紙ボタン
-  const wrow=document.getElementById('wallpaper-row');
-  wrow.innerHTML='';
+  const wrow=document.getElementById('wallpaper-row');wrow.innerHTML='';
   WALLPAPERS.forEach(w=>{
     const b=document.createElement('button');b.className='room-chip'+(w.id===currentWallpaper?' active':'');
     b.textContent=w.label;b.onclick=()=>{currentWallpaper=w.id;renderRoom();saveGame();};wrow.appendChild(b);
   });
-  // 床ボタン
-  const frow=document.getElementById('floor-row');
-  frow.innerHTML='';
+  const frow=document.getElementById('floor-row');frow.innerHTML='';
   FLOORS.forEach(f=>{
     const b=document.createElement('button');b.className='room-chip'+(f.id===currentFloor?' active':'');
     b.textContent=f.label;b.onclick=()=>{currentFloor=f.id;renderRoom();saveGame();};frow.appendChild(b);
   });
-  // 設置済み家具
-  const layer=document.getElementById('room-furniture-layer');
-  layer.innerHTML='';
+  const layer=document.getElementById('room-furniture-layer');layer.innerHTML='';
   placedFurniture.forEach((item,i)=>{
-    const el=document.createElement('div');
-    el.className='furniture';
+    const el=document.createElement('div');el.className='furniture';
     if(FURNITURE_SVG[item.key]){el.innerHTML=FURNITURE_SVG[item.key];el.style.fontSize='0';el.style.width='36px';el.style.height='36px';}
     else{el.textContent='❓';}
-    el.style.left=item.x+'%';el.style.bottom=item.y+'%';
-    el.dataset.idx=i;
-    // ゴミ箱ボタン
-    const delBtn=document.createElement('button');
-    delBtn.className='furniture-delete';
-    delBtn.textContent='🗑';
+    el.style.left=item.x+'%';el.style.bottom=item.y+'%';el.dataset.idx=i;
+    const delBtn=document.createElement('button');delBtn.className='furniture-delete';delBtn.textContent='🗑';
     delBtn.addEventListener('pointerdown',(e)=>{
-      e.stopPropagation();
-      furnitureInventory[item.key]=(furnitureInventory[item.key]||0)+1;
-      placedFurniture.splice(i,1);
-      renderRoom();saveGame();
+      e.stopPropagation();furnitureInventory[item.key]=(furnitureInventory[item.key]||0)+1;
+      placedFurniture.splice(i,1);renderRoom();saveGame();
     });
-    el.appendChild(delBtn);
-
-    // タップで選択/解除、ドラッグで移動
-    el.addEventListener('pointerdown',onFurniturePointerDown);
-    layer.appendChild(el);
+    el.appendChild(delBtn);el.addEventListener('pointerdown',onFurniturePointerDown);layer.appendChild(el);
   });
-  // インベントリ
-  const inv=document.getElementById('furniture-inv');
-  inv.innerHTML='';
-  let hasItem=false;
+  const inv=document.getElementById('furniture-inv');inv.innerHTML='';let hasItem=false;
   for(const[key,cnt]of Object.entries(furnitureInventory)){
     if(cnt<=0)continue;hasItem=true;
     const fd=FURNITURE_DEF[key];if(!fd)continue;
@@ -934,56 +793,36 @@ function renderRoom(){
     if(FURNITURE_SVG[key]){el.innerHTML=FURNITURE_SVG[key];el.style.fontSize='0';el.style.width='36px';el.style.height='36px';}
     else{el.textContent='❓';}
     el.title=fd.label;
-    const badge=document.createElement('span');badge.className='inv-badge';badge.textContent=cnt;
-    el.appendChild(badge);
-    // 売却ボタン（🪙）
-    const sellBtn=document.createElement('button');
-    sellBtn.className='inv-sell';
-    sellBtn.textContent='🪙';
+    const badge=document.createElement('span');badge.className='inv-badge';badge.textContent=cnt;el.appendChild(badge);
+    const sellBtn=document.createElement('button');sellBtn.className='inv-sell';sellBtn.textContent='🪙';
     sellBtn.title=`売る（${FURNITURE_SELL_PRICE[key]||3}コイン）`;
-    sellBtn.addEventListener('click',(e)=>{
-      e.stopPropagation();
-      e.preventDefault();
-      sellFurniture(key);
-    });
+    sellBtn.addEventListener('click',(e)=>{e.stopPropagation();e.preventDefault();sellFurniture(key);});
     el.appendChild(sellBtn);
-
-    // タップで選択/設置トグル
     el.addEventListener('pointerdown',(e)=>{
       e.preventDefault();
       const wasSelected=el.classList.contains('selected');
       document.querySelectorAll('.inv-item').forEach(i=>i.classList.remove('selected'));
-      if(wasSelected){
-        // 2回タップで設置
-        placeFurniture(key);
-      } else {
-        el.classList.add('selected');
-      }
+      if(wasSelected){placeFurniture(key);}else{el.classList.add('selected');}
     });
     inv.appendChild(el);
   }
   if(!hasItem)inv.innerHTML='<span class="inv-empty">お散歩で家具を拾ってこよう🚶</span>';
   renderGiftRow();
 }
-
 function placeFurniture(key){
   if((furnitureInventory[key]||0)<=0)return;
   furnitureInventory[key]--;
   placedFurniture.push({key,x:30+Math.random()*40,y:5+Math.random()*20});
   renderRoom();saveGame();
 }
-
-// ドラッグ
 function onFurniturePointerDown(e){
   e.preventDefault();
-  // 選択トグル
   const wasSelected=e.currentTarget.classList.contains('selected');
   document.querySelectorAll('.furniture').forEach(f=>f.classList.remove('selected'));
   if(!wasSelected)e.currentTarget.classList.add('selected');
   document.body.style.overflow='hidden';
   dragTarget=e.currentTarget;dragTarget.classList.add('dragging');dragTarget.setPointerCapture(e.pointerId);
-  const wrap=document.getElementById('room-canvas-wrap');
-  const rect=wrap.getBoundingClientRect();
+  const wrap=document.getElementById('room-canvas-wrap');const rect=wrap.getBoundingClientRect();
   dragOffX=((e.clientX-rect.left)/rect.width)*100-parseFloat(dragTarget.style.left);
   dragOffY=((rect.bottom-e.clientY)/rect.height)*100-parseFloat(dragTarget.style.bottom);
   dragTarget.addEventListener('pointermove',onFurniturePointerMove);
@@ -991,8 +830,7 @@ function onFurniturePointerDown(e){
 }
 function onFurniturePointerMove(e){
   if(!dragTarget)return;
-  const wrap=document.getElementById('room-canvas-wrap');
-  const rect=wrap.getBoundingClientRect();
+  const wrap=document.getElementById('room-canvas-wrap');const rect=wrap.getBoundingClientRect();
   let nx=((e.clientX-rect.left)/rect.width)*100-dragOffX;
   let ny=((rect.bottom-e.clientY)/rect.height)*100-dragOffY;
   nx=Math.max(0,Math.min(88,nx));ny=Math.max(0,Math.min(60,ny));
@@ -1002,22 +840,16 @@ function onFurniturePointerMove(e){
 }
 function onFurniturePointerUp(e){
   if(!dragTarget)return;
-  document.body.style.overflow='';
-  dragTarget.classList.remove('dragging');
+  document.body.style.overflow='';dragTarget.classList.remove('dragging');
   dragTarget.removeEventListener('pointermove',onFurniturePointerMove);
   dragTarget.removeEventListener('pointerup',onFurniturePointerUp);
   dragTarget=null;saveGame();
 }
-
-// むすむすをお部屋でうろうろ
 function musumuWalk(){
   const el=document.getElementById('room-musumu');if(!el)return;
-  const nx=5+Math.random()*75;
-  el.style.left=nx+'%';
+  el.style.left=(5+Math.random()*75)+'%';
 }
 setInterval(musumuWalk,3000);
-
-// コレクション表示
 function renderCollection(){
   const el=document.getElementById('collection-list');if(!el)return;
   const all=Object.keys(FURNITURE_DEF);
@@ -1029,17 +861,12 @@ function renderCollection(){
     const got=owned.has(k)||giftGiven.has(k);
     const wrap=document.createElement('span');
     wrap.style.cssText=`opacity:${got?1:0.25};display:inline-flex;align-items:center;gap:3px;margin:3px 6px 3px 0;font-size:12px;`;
-    const icon=document.createElement('span');
-    icon.style.cssText='width:20px;height:20px;display:inline-block;flex-shrink:0;';
+    const icon=document.createElement('span');icon.style.cssText='width:20px;height:20px;display:inline-block;flex-shrink:0;';
     if(FURNITURE_SVG[k])icon.innerHTML=FURNITURE_SVG[k];
-    const name=document.createElement('span');
-    name.textContent=fd.label;
-    name.style.color='var(--text2)';
-    wrap.appendChild(icon);wrap.appendChild(name);
-    el.appendChild(wrap);
+    const name=document.createElement('span');name.textContent=fd.label;name.style.color='var(--text2)';
+    wrap.appendChild(icon);wrap.appendChild(name);el.appendChild(wrap);
   });
 }
-
 function showGii(){
   const el=document.getElementById('gii-msg');
   el.classList.remove('show');void el.offsetWidth;el.classList.add('show');
@@ -1100,7 +927,6 @@ function toggleAuto(){
     },3000);
   }else{clearInterval(autoTimer);autoTimer=null;}
 }
-
 const NATSUKI_EVENTS=[
   {key:"sleep",   icon:"🪰💤",text:"手によじ登ってきた！\n羽をぷるぷるさせている……\nそのまま寝ちゃった。"},
   {key:"stare",   icon:"🪰👀",text:"じっとこちらを見ている。\n目が合った。\nそらさない。"},
@@ -1115,10 +941,8 @@ function tryNatsukiEvent(){
   const now=Date.now();if(now-lastNatsukiCheck<180000)return;
   lastNatsukiCheck=now;if(Math.random()>0.05)return;
   const ev=NATSUKI_EVENTS[Math.floor(Math.random()*NATSUKI_EVENTS.length)];
-  const stage=getStage();
-  const imgFile=`event_${ev.key}_${stage.img}.png`;
-  const nImg=document.getElementById('natsuki-img');
-  const nIcon=document.getElementById('natsuki-icon');
+  const stage=getStage();const imgFile=`event_${ev.key}_${stage.img}.png`;
+  const nImg=document.getElementById('natsuki-img');const nIcon=document.getElementById('natsuki-icon');
   const test=new Image();
   test.onload=()=>{nImg.src=imgFile;nImg.style.display='block';nIcon.style.display='none';};
   test.onerror=()=>{nIcon.textContent=ev.icon;nIcon.style.display='block';nImg.style.display='none';};
@@ -1128,7 +952,6 @@ function tryNatsukiEvent(){
 }
 function closeNatsuki(){document.getElementById('natsuki-modal').classList.remove('show');}
 
-// 起動
 const savedAt=loadGame();
 setOutfit(currentOutfit);updateSaveInfo();updateCoinDisp();renderSnacks();render();
 addLog(savedAt?'セーブデータをよみこんだ！おかえり🪰':'ムスカムスカが誕生した。大切に育てよう！');
