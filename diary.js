@@ -216,6 +216,9 @@ function getTodayDiary(state, getPersonality) {
   const existing = data.log.find(e => e.date === todayKey);
   if (existing) return existing;
 
+  // 18時より前は「まだ書いてない」
+  if (new Date().getHours() < 18) return null;
+
   const stage = getDiaryStage(state.lv);
   const p = getPersonality();
   const personalityName = p ? p.name : 'default';
@@ -269,9 +272,11 @@ function renderDiaryPage(state, getPersonality) {
       border-left:3px solid var(--teal);
     ">${today.text}</div>`;
   } else {
-    html += `<div style="font-size:13px;color:var(--text3);text-align:center;padding:1rem;">
-      まだ日記がない…あとでかく。
-    </div>`;
+    const hour = new Date().getHours();
+    const msg = hour < 18
+      ? `まだ書かない。\nゆうがたになったらかく。`
+      : `まだ日記がない…あとでかく。`;
+    html += `<div style="font-family:'Klee One',cursive;font-size:14px;color:var(--text3);text-align:center;padding:1.2rem;line-height:2;white-space:pre-line;">${msg}</div>`;
   }
 
   html += `</div>`;
