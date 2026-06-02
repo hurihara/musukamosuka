@@ -155,7 +155,7 @@ const DIARY_ENTRIES = {
     のんびり: [
       { text: "長く生きてきた。\nぬしは変わらず優しい。\n私もそうありたい。" },
       { text: "かたつむりのつむちゃんとぬしは仲良しだ。\n3人で日向ぼっこをした。" },
-      { text: "ぬしと一緒にお昼寝するのが好きだ。\nいくらでもできる。"},
+      { text: "ぬしと一緒にお昼寝するのが好きだ。\nいくらでもできる。" },
     ],
     きれい好き: [
       { text: "生まれた時から綺麗でいることを続けてきた。\nぬしが喜んでくれる。\nそれが嬉しくて、また綺麗にする。" },
@@ -165,7 +165,7 @@ const DIARY_ENTRIES = {
     あまえんぼ: [
       { text: "ずっとそばにいてくれた。\nありがとうとはうまく言えなかったけど、\n羽をぷるぷるさせて伝えた。" },
       { text: "ぬし構ってー！\nいっぱい構って！" },
-      { text: "大きくなったけどまだ抱っこが足りない\nたくさん抱っこして！"},
+      { text: "大きくなったけどまだ抱っこが足りない\nたくさん抱っこして！" },
     ],
     食いしん坊: [
       { text: "おいしいものを食べ続けた人生だった。\nまだ食べる。\n飽きない止まらない。" },
@@ -210,14 +210,12 @@ function saveDiaryData(data) {
   localStorage.setItem(DIARY_SAVE_KEY, JSON.stringify(data));
 }
 
-// 今日の日記を取得（なければ生成して保存）
 function getTodayDiary(state, getPersonality) {
   const data = getDiaryData();
   const todayKey = getTodayKey();
   const existing = data.log.find(e => e.date === todayKey);
   if (existing) return existing;
 
-  // 新しく生成
   const stage = getDiaryStage(state.lv);
   const p = getPersonality();
   const personalityName = p ? p.name : 'default';
@@ -236,8 +234,8 @@ function getTodayDiary(state, getPersonality) {
     personality: personalityName,
   };
 
-  data.log.unshift(newEntry); // 新しいものを先頭に
-  if (data.log.length > 365) data.log = data.log.slice(0, 365); // 最大1年分
+  data.log.unshift(newEntry);
+  if (data.log.length > 365) data.log = data.log.slice(0, 365);
   saveDiaryData(data);
   return newEntry;
 }
@@ -251,7 +249,6 @@ function renderDiaryPage(state, getPersonality) {
 
   let html = '';
 
-  // 今日の日記
   html += `<div class="card" style="margin-bottom:10px;">
     <div class="section-title">📔 きょうの日記</div>`;
 
@@ -279,7 +276,6 @@ function renderDiaryPage(state, getPersonality) {
 
   html += `</div>`;
 
-  // バックログ
   const past = data.log.filter(e => e.date !== getTodayKey());
   if (past.length > 0) {
     html += `<div class="card">
