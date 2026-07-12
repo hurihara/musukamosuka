@@ -12,30 +12,49 @@ const DIARY_ENTRIES = {
       { text: "ぬし" },
       { text: "ぬし\nそと" },
       { text: "くらい" },
+      { text: "あたたかい" },
+      { text: "ゆれた" },
     ],
     やんちゃ: [
       { text: "きっく\nいたい" },
+      { text: "ごつん\nいたい" },
+      { text: "うごく\nうごく" },
+      { text: "はねた" },
     ],
     物知り: [
       { text: "ぬし\nこえ" },
+      { text: "おと\nいっぱい" },
+      { text: "きこえる" },
     ],
     陽気: [
       { text: "たのしい" },
+      { text: "わくわく" },
+      { text: "うれしい" },
     ],
     のんびり: [
       { text: "ねた" },
+      { text: "ぽかぽか" },
+      { text: "うとうと" },
     ],
     きれい好き: [
       { text: "ぶるぶる" },
+      { text: "ぴかぴか" },
+      { text: "さらさら" },
     ],
     あまえんぼ: [
       { text: "なでて\nいっぱい" },
+      { text: "だっこ" },
+      { text: "ぬしのて\nすき" },
     ],
     食いしん坊: [
       { text: "ごはん" },
+      { text: "おなか\nすいた" },
+      { text: "もぐもぐ" },
     ],
     さすらい: [
       { text: "とびたい" },
+      { text: "はねを\nうごかした" },
+      { text: "とおく" },
     ],
   },
 
@@ -228,7 +247,15 @@ function getTodayDiary(state, getPersonality) {
 
   if (entries.length === 0) return null;
 
-  const entry = entries[Math.floor(Math.random() * entries.length)];
+  // 直前の日記と同じ文章が連続で選ばれないようにする（候補が複数ある場合のみ）
+  const lastText = data.log[0] ? data.log[0].text : null;
+  let candidates = entries;
+  if (entries.length > 1 && lastText) {
+    const filtered = entries.filter(e => e.text !== lastText);
+    if (filtered.length > 0) candidates = filtered;
+  }
+
+  const entry = candidates[Math.floor(Math.random() * candidates.length)];
   const newEntry = {
     date: todayKey,
     text: entry.text,
