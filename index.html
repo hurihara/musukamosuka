@@ -615,6 +615,7 @@ function resetGame(){
 }
 function _doReset(){
   localStorage.removeItem(SAVE_KEY);
+  localStorage.removeItem('musukamosuka_diary');
   state={...DEFAULT_STATE};currentOutfit='default';snackStock=[];
   furnitureInventory={};placedFurniture=[];giftGiven=new Set();
   currentWallpaper='default';currentFloor='default';
@@ -673,8 +674,14 @@ function doAction(type){
   if(a.hp)     state.hp=cap(state.hp+applyMult('hp',a.hp),0,999);
   if(a.luk)    state.luk=cap(state.luk+applyMult('luk',a.luk),0,999);
   if(a.love)   state.love=cap(state.love+applyMult('love',a.love));
-  if(a.hunger) state.hunger=cap(state.hunger+a.hunger);
-  if(a.clean)  state.clean=cap(state.clean+applyMult('bath',a.clean));
+  if(a.hunger){
+    const hv=(type==='feed')?applyMult('feed',a.hunger):applyMult('hunger',a.hunger);
+    state.hunger=cap(state.hunger+hv);
+  }
+  if(a.clean){
+    const cv=(type==='bath')?applyMult('bath',a.clean):applyMult('cleanDecay',a.clean);
+    state.clean=cap(state.clean+cv);
+  }
   state.exp+=Math.floor(Math.random()*6)+3;
   checkLevelUp();checkGifts();bounceChara();render();saveGame();
   setTimeout(()=>{state.busy=false;setBtns(false);tryNatsukiEvent();},700);
@@ -717,7 +724,7 @@ function goWalk(){
   document.getElementById('walk-result').textContent=resultText;
   document.getElementById('walk-modal').classList.add('show');
   if(ev.love)  state.love=cap(state.love+ev.love);
-  if(ev.clean) state.clean=cap(state.clean+ev.clean);
+  if(ev.clean) state.clean=cap(state.clean+applyMult('cleanDecay',ev.clean));
   state.hunger=cap(state.hunger-8);
   state.actionCount=state.actionCount||{};
   state.actionCount['walk']=(state.actionCount['walk']||0)+1;
